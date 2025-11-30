@@ -23,7 +23,7 @@ end
 % Simple test for magnitude calculation. Compares magnitude function with actual magnitude (error is expected due to truncation/limited square root resolution)
 % Result is <15% of maximum magnitude (which is sufficient for our purposes)
 function test_magnitude
-    file = "./music/easemymind.wav";
+    file = "../music/easemymind.wav";
     samps = audioread(file, "native");
     Fs = 44100;
 
@@ -43,7 +43,11 @@ end
 
 % Sandbox area for testing
 
-test_magnitude
+% test_magnitude
+file = "../music/easemymind.wav";
+samps = audioread(file, "native");
+Fs = 44100;
+plot_time(samps(1:100000, 1), Fs, 5)
 % plotFFT(leftsamps(:, 2), Fs)
 % plot_frequency_response(leftSamps, filter1(leftSamps), Fs)
 % filter1(leftSamps)
