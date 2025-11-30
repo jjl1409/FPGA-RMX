@@ -1,6 +1,7 @@
 clear;
-clc;
 clf;
+% Tests function/script. Used as a scratchpad/simple tests for our MATLAB models
+% Run by calling tests from command line from repo root dir
 
 % Simple FIR filter
 % This is a basic moving average filter
@@ -20,9 +21,9 @@ function output = filter1(input, size)
 end
 
 % Simple test for magnitude calculation. Compares magnitude function with actual magnitude (error is expected due to truncation/limited square root resolution)
-% Result is <10% of maximum magnitude (which is sufficient for our purposes)
+% Result is <15% of maximum magnitude (which is sufficient for our purposes)
 function test_magnitude
-    file = "../music/easemymind.wav";
+    file = "./music/easemymind.wav";
     samps = audioread(file, "native");
     Fs = 44100;
 
@@ -35,9 +36,7 @@ function test_magnitude
         [sums(i), magnitudes(i)] = magnitude(x1, x2);
         normalized(i) = round(sqrt(double(x1) ^2 + double(x2)^2));
     end
-    magnitudes(1:10)
-    normalized(1:10)
-    plot_time(abs(magnitudes - normalized) ./ max(magnitudes), Fs)
+    plot_time(abs(magnitudes(1:100000) - normalized(1:100000)) ./ max(magnitudes), Fs, 5, "Magnitude Function Error (Time Domain)")
 end
 
 % This prints out all plots from all tests into their own figures. Note that these tests are not pass/fail, and instead serve to check basic functionality of our Matlab implementations before verifying with RTL.

@@ -29,9 +29,9 @@ end
 function root = square_root(x, square_root_bits)
     arguments
         x (1, 1) uint64
-        square_root_bits(1, 1) int8 = 14
+        square_root_bits(1, 1) int8 = 13
     end
-    x = bitshift(x, -32 + square_root_bits);
-    root = uint32(round(sqrt(double(x))));
-    root = bitshift(root, 16 - square_root_bits / 2);
+    x = bitshift(x, -33 + square_root_bits);
+    root = uint32(floor(sqrt(double(x))));
+    root = bitshift(root, 17 - square_root_bits / 2);
 end

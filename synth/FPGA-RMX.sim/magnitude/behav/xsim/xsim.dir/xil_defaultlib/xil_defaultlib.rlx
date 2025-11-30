@@ -1,0 +1,7 @@
+0.7
+2020.2
+Nov 14 2025
+19:37:27
+C:/Users/Jason/Documents/Programming/FPGA-RMX/rtl/magnitude.sv,1764488908,systemVerilog,,C:/Users/Jason/Documents/Programming/FPGA-RMX/verif/magnitude_tb.sv,,magnitude;square_root;square_sum,,uvm,../../../../../../../../../../AMDDesignTools/2025.2/Vivado/data/rsb/busdef,,,,,
+C:/Users/Jason/Documents/Programming/FPGA-RMX/synth/FPGA-RMX.sim/magnitude/behav/xsim/glbl.v,1756381829,verilog,,,,glbl,,uvm,,,,,,
+C:/Users/Jason/Documents/Programming/FPGA-RMX/verif/magnitude_tb.sv,1764489194,systemVerilog,,,,magnitude_tb,,uvm,../../../../../../../../../../AMDDesignTools/2025.2/Vivado/data/rsb/busdef,,,,,
