@@ -213,8 +213,9 @@ __marimo__/
 # synth/FPGA_RMX.sim/
 *.tmp
 *.wdb
-vivado.jou
-vivado.log
-FPGA_RMX/
+*.jou
+*.log
+FPGA-RMX/
 .xil
 dfx_runtime.txt
+FPGA-RMX/FPGA-RMX.cache/wt/project.wpc
