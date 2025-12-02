@@ -3,32 +3,32 @@
 // Testbench for magnitude module.
 module magnitude_tb #(
     parameter SQUARE_ROOT_BITS = 13,
-    parameter INPUT_BITS = 16,
-    parameter SQUARE_SUM_OUTPUT_BITS = INPUT_BITS * 2 + 1,
-    parameter OUTPUT_BITS = INPUT_BITS + 1
+    parameter DATA_IN_BITS = 16,
+    parameter SQUARE_SUM_OUT_BITS = DATA_IN_BITS * 2 + 1,
+    parameter DATA_OUT_BITS = DATA_IN_BITS + 1
 )();
 
     // DUT inputs/outputs
     logic clk;
     logic rst;
-    logic [INPUT_BITS - 1:0] input_1;
-    logic [INPUT_BITS - 1:0] input_2;
-    logic input_ready;
-    logic [OUTPUT_BITS - 1:0] output_1;
-    logic output_ready;
+    logic [DATA_IN_BITS - 1:0] data_in_1;
+    logic [DATA_IN_BITS - 1:0] data_in_2;
+    logic data_in_ready;
+    logic [DATA_OUT_BITS - 1:0] data_out;
+    logic data_out_ready;
 
     // DUT
     magnitude #(
         .SQUARE_ROOT_BITS (SQUARE_ROOT_BITS),
-        .INPUT_BITS (INPUT_BITS)
+        .DATA_IN_BITS (DATA_IN_BITS)
     ) dut (
         .clk (clk),
         .rst (rst),
-        .input_ready (input_ready),
-        .input_1 (input_1),
-        .input_2 (input_2),
-        .output_ready (output_ready),
-        .output_1 (output_1)
+        .data_in_ready (data_in_ready),
+        .data_in_1 (data_in_1),
+        .data_in_2 (data_in_2),
+        .data_out_ready (data_out_ready),
+        .data_out (data_out)
     );
 
     // Clock generation (estimate 10ns clock)
@@ -41,24 +41,24 @@ module magnitude_tb #(
 
     // Stimulus/testing logic
     integer fd;
-    string input_1_file;
-    string input_2_file;
+    string data_in_1_file;
+    string data_in_2_file;
     string square_sum_1_file;
     string magnitude_1_file;
     string line;
 
-    logic [INPUT_BITS - 1:0] input_1_q [$];
-    logic [INPUT_BITS - 1:0] input_2_q [$];
-    logic [SQUARE_SUM_OUTPUT_BITS - 1:0] square_sum_1_q [$];
-    logic [OUTPUT_BITS - 1:0] magnitude_1_q [$];
+    logic [DATA_IN_BITS - 1:0] data_in_1_q [$];
+    logic [DATA_IN_BITS - 1:0] data_in_2_q [$];
+    logic [SQUARE_SUM_OUT_BITS - 1:0] square_sum_1_q [$];
+    logic [DATA_OUT_BITS - 1:0] magnitude_1_q [$];
 
-    logic [INPUT_BITS - 1:0] input_1_read;
-    logic [INPUT_BITS - 1:0] input_2_read;
-    logic [SQUARE_SUM_OUTPUT_BITS - 1:0] square_sum_1_read;
-    logic [OUTPUT_BITS - 1:0] magnitude_1_read;
+    logic [DATA_IN_BITS - 1:0] data_in_1_read;
+    logic [DATA_IN_BITS - 1:0] data_in_2_read;
+    logic [SQUARE_SUM_OUT_BITS - 1:0] square_sum_1_read;
+    logic [DATA_OUT_BITS - 1:0] magnitude_1_read;
 
-    logic [SQUARE_SUM_OUTPUT_BITS - 1:0] square_sum_1_expected;
-    logic [OUTPUT_BITS - 1:0] magnitude_1_expected;
+    logic [SQUARE_SUM_OUT_BITS - 1:0] square_sum_1_expected;
+    logic [DATA_OUT_BITS - 1:0] magnitude_1_expected;
     logic done;
 
 
@@ -66,34 +66,34 @@ module magnitude_tb #(
     initial begin
         rst = 1'b1;
         done = 1'b0;
-        input_1 = 0;
-        input_2 = 0;
-        input_ready = 1'b0;
+        data_in_1 = 0;
+        data_in_2 = 0;
+        data_in_ready = 1'b0;
 
-        input_1_file = "easemymind_input_1.csv";
-        input_2_file = "easemymind_input_2.csv";
+        data_in_1_file = "easemymind_input_1.csv";
+        data_in_2_file = "easemymind_input_2.csv";
         square_sum_1_file = "easemymind_square_sum_1.csv";
         magnitude_1_file = "easemymind_magnitude_1.csv";
         
-        fd = $fopen(input_1_file, "r");
+        fd = $fopen(data_in_1_file, "r");
         if (fd == 0) begin
-            $display("Error: Could not open %s", input_1_file);
+            $display("Error: Could not open %s", data_in_1_file);
             $fatal;
         end
         while ($fgets(line, fd)) begin
-            $sscanf(line, "%d", input_1_read);
-            input_1_q.push_back(input_1_read);
+            $sscanf(line, "%d", data_in_1_read);
+            data_in_1_q.push_back(data_in_1_read);
         end
         $fclose(fd);
 
-        fd = $fopen(input_2_file, "r");
+        fd = $fopen(data_in_2_file, "r");
         if (fd == 0) begin
-            $display("Error: Could not open %s", input_2_file);
+            $display("Error: Could not open %s", data_in_2_file);
             $fatal;
         end
         while ($fgets(line, fd)) begin
-            $sscanf(line, "%d", input_2_read);
-            input_2_q.push_back(input_2_read);
+            $sscanf(line, "%d", data_in_2_read);
+            data_in_2_q.push_back(data_in_2_read);
         end
         $fclose(fd);
 
@@ -122,8 +122,8 @@ module magnitude_tb #(
         @(posedge clk);
         rst = 1'b0;
         $display("%t: Stimulus files loaded.", $time);
-        $display("%t: Input 1 loaded: %d samples.", $time, input_1_q.size());
-        $display("%t: Input 2 loaded: %d samples.", $time, input_2_q.size());
+        $display("%t: Data in 1 loaded: %d samples.", $time, data_in_1_q.size());
+        $display("%t: Data in 2 loaded: %d samples.", $time, data_in_2_q.size());
         $display("%t: Square sum 1 loaded: %d samples.", $time, square_sum_1_q.size());
         $display("%t: Magnitude 1 loaded: %d samples.", $time, magnitude_1_q.size());
         @(posedge clk);
@@ -132,7 +132,7 @@ module magnitude_tb #(
         // Begin verification
         $display("%t: Beginning verification.", $time);
         @(posedge clk);
-        input_ready <= 1'b1;
+        data_in_ready <= 1'b1;
 
         @(posedge done);
         $display("%t: Test passed", $time);
@@ -141,32 +141,32 @@ module magnitude_tb #(
 
     // Clocked DUT stimulus
     always @(negedge clk) begin
-        if (input_ready) begin
-            if (input_1_q.size > 0) begin
-                input_1 <= input_1_q.pop_front();
+        if (data_in_ready) begin
+            if (data_in_1_q.size > 0) begin
+                data_in_1 <= data_in_1_q.pop_front();
             end
-            if (input_2_q.size > 0) begin
-                input_2 <= input_2_q.pop_front();
+            if (data_in_2_q.size > 0) begin
+                data_in_2 <= data_in_2_q.pop_front();
             end
         end
     end
 
     // Checker
     always @(posedge clk) begin
-        if (dut.square_sum_output_ready) begin
+        if (dut.square_sum_out_ready) begin
             if (square_sum_1_q.size() > 0) begin
                 square_sum_1_expected = square_sum_1_q.pop_front;
-                if (dut.square_sum_output !== square_sum_1_expected) begin
-                    $display("%t: Mismatch in square sum output: Expected %d, got %d", $time, square_sum_1_expected, dut.square_sum_output);
+                if (dut.square_sum_out !== square_sum_1_expected) begin
+                    $display("%t: Mismatch in square sum data out: Expected %d, got %d", $time, square_sum_1_expected, dut.square_sum_out);
                     $fatal;
                 end
             end
         end
-        if (output_ready) begin 
+        if (data_out_ready) begin 
             if (magnitude_1_q.size() > 0) begin
                 magnitude_1_expected = magnitude_1_q.pop_front;
-                if (output_1 !== magnitude_1_expected) begin
-                    $display("%t: Mismatch in magnitude output: Expected %d, got %d", $time, magnitude_1_expected, output_1);
+                if (data_out !== magnitude_1_expected) begin
+                    $display("%t: Mismatch in magnitude data out: Expected %d, got %d", $time, magnitude_1_expected, data_out);
                     $fatal;
                 end
             end else begin

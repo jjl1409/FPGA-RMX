@@ -11,15 +11,15 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="36,571.800 ns"></ZoomStartTime>
-      <ZoomEndTime time="36,686.101 ns"></ZoomEndTime>
-      <Cursor1Time time="36,645.000 ns"></Cursor1Time>
+      <ZoomStartTime time="26,460,554.837 ns"></ZoomStartTime>
+      <ZoomEndTime time="26,460,585.033 ns"></ZoomEndTime>
+      <Cursor1Time time="26,460,580.000 ns"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="388"></NameColumnWidth>
-      <ValueColumnWidth column_width="133"></ValueColumnWidth>
+      <NameColumnWidth column_width="404"></NameColumnWidth>
+      <ValueColumnWidth column_width="178"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="19" />
+   <WVObjectSize size="20" />
    <wvobject fp_name="/magnitude_tb/clk" type="logic">
       <obj_property name="ElementShortName">clk</obj_property>
       <obj_property name="ObjectShortName">clk</obj_property>
@@ -28,81 +28,76 @@
       <obj_property name="ElementShortName">rst</obj_property>
       <obj_property name="ObjectShortName">rst</obj_property>
    </wvobject>
-   <wvobject fp_name="/magnitude_tb/input_1" type="array">
-      <obj_property name="ElementShortName">input_1[15:0]</obj_property>
-      <obj_property name="ObjectShortName">input_1[15:0]</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   <wvobject fp_name="/magnitude_tb/data_in_1" type="array">
+      <obj_property name="ElementShortName">data_in_1[15:0]</obj_property>
+      <obj_property name="ObjectShortName">data_in_1[15:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/magnitude_tb/input_2" type="array">
-      <obj_property name="ElementShortName">input_2[15:0]</obj_property>
-      <obj_property name="ObjectShortName">input_2[15:0]</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   <wvobject fp_name="/magnitude_tb/data_in_2" type="array">
+      <obj_property name="ElementShortName">data_in_2[15:0]</obj_property>
+      <obj_property name="ObjectShortName">data_in_2[15:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/magnitude_tb/input_ready" type="logic">
-      <obj_property name="ElementShortName">input_ready</obj_property>
-      <obj_property name="ObjectShortName">input_ready</obj_property>
+   <wvobject fp_name="/magnitude_tb/data_in_ready" type="logic">
+      <obj_property name="ElementShortName">data_in_ready</obj_property>
+      <obj_property name="ObjectShortName">data_in_ready</obj_property>
+   </wvobject>
+   <wvobject fp_name="/magnitude_tb/data_out_ready" type="logic">
+      <obj_property name="ElementShortName">data_out_ready</obj_property>
+      <obj_property name="ObjectShortName">data_out_ready</obj_property>
    </wvobject>
    <wvobject fp_name="/magnitude_tb/fd" type="array">
       <obj_property name="ElementShortName">fd[31:0]</obj_property>
       <obj_property name="ObjectShortName">fd[31:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/magnitude_tb/dut/square_sum_1/product_1" type="array">
-      <obj_property name="ElementShortName">product_1[31:0]</obj_property>
-      <obj_property name="ObjectShortName">product_1[31:0]</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   <wvobject fp_name="/magnitude_tb/data_in_1_read" type="array">
+      <obj_property name="ElementShortName">data_in_1_read[15:0]</obj_property>
+      <obj_property name="ObjectShortName">data_in_1_read[15:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/magnitude_tb/dut/square_sum_1/product_2" type="array">
-      <obj_property name="ElementShortName">product_2[31:0]</obj_property>
-      <obj_property name="ObjectShortName">product_2[31:0]</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   <wvobject fp_name="/magnitude_tb/data_in_2_read" type="array">
+      <obj_property name="ElementShortName">data_in_2_read[15:0]</obj_property>
+      <obj_property name="ObjectShortName">data_in_2_read[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/magnitude_tb/square_sum_1_read" type="array">
+      <obj_property name="ElementShortName">square_sum_1_read[32:0]</obj_property>
+      <obj_property name="ObjectShortName">square_sum_1_read[32:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/magnitude_tb/magnitude_1_read" type="array">
+      <obj_property name="ElementShortName">magnitude_1_read[16:0]</obj_property>
+      <obj_property name="ObjectShortName">magnitude_1_read[16:0]</obj_property>
    </wvobject>
    <wvobject fp_name="/magnitude_tb/square_sum_1_expected" type="array">
       <obj_property name="ElementShortName">square_sum_1_expected[32:0]</obj_property>
       <obj_property name="ObjectShortName">square_sum_1_expected[32:0]</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
    </wvobject>
-   <wvobject fp_name="/magnitude_tb/dut/square_sum_output" type="array">
-      <obj_property name="ElementShortName">square_sum_output[32:0]</obj_property>
-      <obj_property name="ObjectShortName">square_sum_output[32:0]</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   <wvobject fp_name="/magnitude_tb/dut/square_sum_out" type="array">
+      <obj_property name="ElementShortName">square_sum_out[32:0]</obj_property>
+      <obj_property name="ObjectShortName">square_sum_out[32:0]</obj_property>
    </wvobject>
    <wvobject fp_name="/magnitude_tb/magnitude_1_expected" type="array">
       <obj_property name="ElementShortName">magnitude_1_expected[16:0]</obj_property>
       <obj_property name="ObjectShortName">magnitude_1_expected[16:0]</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
    </wvobject>
-   <wvobject fp_name="/magnitude_tb/dut/output_1" type="array">
-      <obj_property name="ElementShortName">output_1[16:0]</obj_property>
-      <obj_property name="ObjectShortName">output_1[16:0]</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   <wvobject fp_name="/magnitude_tb/data_out" type="array">
+      <obj_property name="ElementShortName">data_out[16:0]</obj_property>
+      <obj_property name="ObjectShortName">data_out[16:0]</obj_property>
    </wvobject>
    <wvobject fp_name="/magnitude_tb/done" type="logic">
       <obj_property name="ElementShortName">done</obj_property>
       <obj_property name="ObjectShortName">done</obj_property>
    </wvobject>
-   <wvobject fp_name="/magnitude_tb/dut/square_root_1/square_root_input_ready" type="logic">
-      <obj_property name="ElementShortName">square_root_input_ready</obj_property>
-      <obj_property name="ObjectShortName">square_root_input_ready</obj_property>
+   <wvobject fp_name="/magnitude_tb/SQUARE_ROOT_BITS" type="array">
+      <obj_property name="ElementShortName">SQUARE_ROOT_BITS[31:0]</obj_property>
+      <obj_property name="ObjectShortName">SQUARE_ROOT_BITS[31:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/magnitude_tb/dut/square_root_1/square_root_input" type="array">
-      <obj_property name="ElementShortName">square_root_input[12:0]</obj_property>
-      <obj_property name="ObjectShortName">square_root_input[12:0]</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   <wvobject fp_name="/magnitude_tb/DATA_IN_BITS" type="array">
+      <obj_property name="ElementShortName">DATA_IN_BITS[31:0]</obj_property>
+      <obj_property name="ObjectShortName">DATA_IN_BITS[31:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/magnitude_tb/dut/square_root_1/square_root_output" type="array">
-      <obj_property name="ElementShortName">square_root_output[6:0]</obj_property>
-      <obj_property name="ObjectShortName">square_root_output[6:0]</obj_property>
+   <wvobject fp_name="/magnitude_tb/SQUARE_SUM_OUT_BITS" type="array">
+      <obj_property name="ElementShortName">SQUARE_SUM_OUT_BITS[31:0]</obj_property>
+      <obj_property name="ObjectShortName">SQUARE_SUM_OUT_BITS[31:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/magnitude_tb/dut/square_root_1/square_root_output_ready" type="logic">
-      <obj_property name="ElementShortName">square_root_output_ready</obj_property>
-      <obj_property name="ObjectShortName">square_root_output_ready</obj_property>
-   </wvobject>
-   <wvobject fp_name="/magnitude_tb/output_ready" type="logic">
-      <obj_property name="ElementShortName">output_ready</obj_property>
-      <obj_property name="ObjectShortName">output_ready</obj_property>
-   </wvobject>
-   <wvobject fp_name="/magnitude_tb/SQUARE_SUM_OUTPUT_BITS" type="array">
-      <obj_property name="ElementShortName">SQUARE_SUM_OUTPUT_BITS[31:0]</obj_property>
-      <obj_property name="ObjectShortName">SQUARE_SUM_OUTPUT_BITS[31:0]</obj_property>
+   <wvobject fp_name="/magnitude_tb/DATA_OUT_BITS" type="array">
+      <obj_property name="ElementShortName">DATA_OUT_BITS[31:0]</obj_property>
+      <obj_property name="ObjectShortName">DATA_OUT_BITS[31:0]</obj_property>
    </wvobject>
 </wave_config>
