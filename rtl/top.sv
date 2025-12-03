@@ -66,22 +66,22 @@ module top #(
     assign in_data_l = out_data_l;
     assign in_data_r = out_data_r;
 
-    // Volume module
+    // led_display module
 
-    logic [AUDIO_DATA_BITS - 1:0] volume_data;
+    logic [AUDIO_DATA_BITS - 1:0] led_display_data;
     always_ff @(posedge clk) begin
-        volume_data <= out_data_l;
+        led_display_data <= out_data_l;
     end
     
-    volume #(
+    led_display #(
         .LED_BITS (LED_BITS),
         .LED_COUNT_BITS (LED_COUNT_BITS),
         .LED_COUNT_PERIOD (LED_COUNT_PERIOD),
         .DATA_BITS (AUDIO_DATA_BITS)
-    ) volume_1 (
+    ) led_display_1 (
         .clk (clk),
         .rst (rst),
-        .data_in (volume_data),
+        .data_in (led_display_data),
         .leds (leds)
     );
 

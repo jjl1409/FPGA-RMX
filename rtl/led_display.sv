@@ -1,4 +1,4 @@
-module volume #(
+module led_display #(
     parameter LED_BITS = 16,
     parameter LED_COUNT_BITS = 28,
     parameter LED_COUNT_PERIOD = 2 ** LED_COUNT_BITS,
@@ -17,8 +17,7 @@ module volume #(
 
     always_ff @(posedge clk) begin
         if (count == 1'b0) begin
-            leds <= data_in[DATA_BITS - 1:DATA_BITS - LED_BITS];
+            leds <= data_in[DATA_BITS - 1 -: LED_BITS];
         end
     end
-
 endmodule
