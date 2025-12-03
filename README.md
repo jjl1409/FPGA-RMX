@@ -1,9 +1,9 @@
 # FPGA-RMX
-Initially created as a project for Digital Systems Processing ELEN4810.
-
 Audio interface using a Basys-3 FPGA and PMOD I2S2 as our ADC/DAC. Displays detected BPM on seven segment display, amplitude with LEDs, and plays snare on detected beats.
 
 Contains MATLAB models for digital signal processing elements, along with verification testbenches for hardware components.
+
+Initially created as a project for Digital Systems Processing ELEN4810.
 
 ## MATLAB
 To run informal tests, call tests in Matlab from ./matlab directory. This displays all of the plots for each module.
