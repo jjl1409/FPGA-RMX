@@ -15,6 +15,8 @@ The Vivado project can be created by running the build.bat script (or running th
 
 First, the design must be elaborated and subsequently synthesized. Then the project must be implemented, which can all be done through the GUI. Finally, the bitstream must be generated and subsequently programmed onto a connected Basys 3 board using Hardware Manager. No major errors are present, and any critical error indicates an incorrect install/error in the project.
 
+For version control, run File->Project->Write Tcl. Save the output file as ./build.tcl, and make sure "write all sources" and "copy sources to new project" are checked. All of Vivado's generated files are not versioned except for the tcl file, which we run to generate our project including the .xpr file used to load a project into Vivado.
+
 ## HARDWARE
 The Basys-3 board requires the PMOD I2S2 module to be plugged into the JA header. This can be modified to use the other PMOD headers by editing the constraint file. A line in audio signal must be connected, along with a line out audio signal. Once the board is programmed, it should act as a passthrough with respect to audio.
 
