@@ -17,7 +17,13 @@ module led_display #(
 
     always_ff @(posedge clk) begin
         if (count == 1'b0) begin
-            leds <= data_in[DATA_BITS - 1 -: LED_BITS];
+            for (int i = 0; i < LED_BITS; i++) begin
+                if (data_in >= (((2 ** DATA_BITS) - 1) * (i + 1)) / LED_BITS) begin 
+                    leds[i] <= 1'b1;
+                end else begin
+                    leds[i] <= 1'b0;
+                end
+            end
         end
     end
 endmodule
