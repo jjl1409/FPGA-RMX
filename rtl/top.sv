@@ -4,7 +4,7 @@ module top #(
     parameter I2S2_COUNT_BITS = 9,
     parameter AUDIO_DATA_BITS = 21,
     parameter LED_BITS = 14,
-    parameter LED_COUNT_BITS = 22,
+    parameter LED_COUNT_BITS = 21,
     parameter LED_COUNT_PERIOD = 2 ** LED_COUNT_BITS,
     parameter DECIMAL_BITS = 12,
     parameter BINARY_BITS = 4,
@@ -13,8 +13,12 @@ module top #(
     parameter ANODE_BITS = 4,
     parameter SEVEN_SEGMENT_DISPLAY_COUNT_BITS = 27,
     parameter SEVEN_SEGMENT_DISPLAY_REFRESH_BITS = 20,
-    parameter AVERAGE_NUM = 32,
-    parameter AVERAGE_BITS = 5
+    parameter AVERAGE_BITS = 5,
+    parameter AVERAGE_NUM = 2 ** AVERAGE_BITS,
+    parameter SQUARE_ROOT_BITS = 13,
+    parameter SQUARE_SUM_OUT_BITS = 33,
+    parameter MAGNITUDE_DATA_IN_BITS = 16,
+    parameter DSP_DATA_BITS = 17
 )(
     input logic  sys_clk,
     output logic tx_mclk,
@@ -76,34 +80,56 @@ module top #(
     );
     assign in_data_l = out_data_l;
     assign in_data_r = out_data_r;
+
+    // Magnitude module to take RMS of left and right audio signals
+    logic magnitude_data_out_ready;
+    logic [DSP_DATA_BITS - 1:0] magnitude_data_out;
+    magnitude #(
+        .SQUARE_ROOT_BITS (SQUARE_ROOT_BITS),
+        .SQUARE_SUM_OUT_BITS (SQUARE_SUM_OUT_BITS),
+        .DATA_IN_BITS (MAGNITUDE_DATA_IN_BITS),
+        .DATA_OUT_BITS (DSP_DATA_BITS)
+    ) magnitude_i (
+        .clk (clk),
+        .rst (rst),
+        .data_in_ready (i2s2_out_ready),
+        .data_in_1 (out_data_r[AUDIO_DATA_BITS - 1 -: MAGNITUDE_DATA_IN_BITS]),
+        .data_in_2 (out_data_l[AUDIO_DATA_BITS - 1 -: MAGNITUDE_DATA_IN_BITS]),
+        .data_out_ready (magnitude_data_out_ready),
+        .data_out (magnitude_data_out)
+    );    
     
     // Double moving average modules to measure power
-    logic [AUDIO_DATA_BITS - 1:0] moving_average_data_out_1;
-    logic [AUDIO_DATA_BITS - 1:0] moving_average_data_out_2;
+    logic moving_average_data_out_ready_1;
+    logic [DSP_DATA_BITS - 1:0] moving_average_data_out_1;
+    logic moving_average_data_out_ready_2;
+    logic [DSP_DATA_BITS - 1:0] moving_average_data_out_2;
     
     moving_average #(
-        .DATA_IN_BITS (AUDIO_DATA_BITS),
-        .DATA_OUT_BITS (AUDIO_DATA_BITS),
+        .DATA_IN_BITS (DSP_DATA_BITS),
+        .DATA_OUT_BITS (DSP_DATA_BITS),
         .AVERAGE_NUM (AVERAGE_NUM),
         .AVERAGE_BITS (AVERAGE_BITS)
     ) moving_average_1 (
         .clk (clk),
         .rst (rst),
-        .data_in_ready (i2s2_out_ready),
-        .data_in (out_data_l),
+        .data_in_ready (magnitude_data_out_ready),
+        .data_in (magnitude_data_out),
+        .data_out_ready (moving_average_data_out_ready_1),
         .data_out (moving_average_data_out_1)
     );
     
     moving_average #(
-        .DATA_IN_BITS (AUDIO_DATA_BITS),
-        .DATA_OUT_BITS (AUDIO_DATA_BITS),
+        .DATA_IN_BITS (DSP_DATA_BITS),
+        .DATA_OUT_BITS (DSP_DATA_BITS),
         .AVERAGE_NUM (AVERAGE_NUM),
         .AVERAGE_BITS (AVERAGE_BITS)
     ) moving_average_2 (
         .clk (clk),
         .rst (rst),
-        .data_in_ready (i2s2_out_ready),
+        .data_in_ready (moving_average_data_out_ready_1),
         .data_in (moving_average_data_out_1),
+        .data_out_ready (moving_average_data_out_ready_2),
         .data_out (moving_average_data_out_2)
     );
         
@@ -113,7 +139,7 @@ module top #(
         .LED_BITS (LED_BITS),
         .LED_COUNT_BITS (LED_COUNT_BITS),
         .LED_COUNT_PERIOD (LED_COUNT_PERIOD),
-        .DATA_BITS (AUDIO_DATA_BITS)
+        .DATA_IN_BITS (DSP_DATA_BITS)
     ) led_display_1 (
         .clk (clk),
         .rst (rst),
