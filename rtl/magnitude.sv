@@ -57,7 +57,7 @@ module square_root #(
     always_ff @(posedge clk) begin
             // Stage 1
         square_root_in_ready <= data_in_ready;
-        square_root_in <= data_in_1[DATA_IN_BITS - 1:DATA_IN_BITS - SQUARE_ROOT_BITS];
+        square_root_in <= data_in_1[DATA_IN_BITS - 1 -: SQUARE_ROOT_BITS];
         // Stage 2
         square_root_out_ready <= square_root_in_ready;
         square_root_out <= square_root_ram[square_root_in];
