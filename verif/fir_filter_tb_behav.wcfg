@@ -11,13 +11,13 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="6.767 ns"></ZoomStartTime>
-      <ZoomEndTime time="56.168 ns"></ZoomEndTime>
-      <Cursor1Time time="15.067 ns"></Cursor1Time>
+      <ZoomStartTime time="43.684 ns"></ZoomStartTime>
+      <ZoomEndTime time="231.585 ns"></ZoomEndTime>
+      <Cursor1Time time="145.284 ns"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="534"></NameColumnWidth>
-      <ValueColumnWidth column_width="142"></ValueColumnWidth>
+      <ValueColumnWidth column_width="138"></ValueColumnWidth>
    </column_width_setting>
    <WVObjectSize size="25" />
    <wvobject fp_name="/fir_filter_tb/clk" type="logic">
@@ -29,8 +29,8 @@
       <obj_property name="ObjectShortName">rst</obj_property>
    </wvobject>
    <wvobject fp_name="/fir_filter_tb/filter_coefficients" type="array">
-      <obj_property name="ElementShortName">filter_coefficients[31:0][11:0]</obj_property>
-      <obj_property name="ObjectShortName">filter_coefficients[31:0][11:0]</obj_property>
+      <obj_property name="ElementShortName">filter_coefficients[63:0][11:0]</obj_property>
+      <obj_property name="ObjectShortName">filter_coefficients[63:0][11:0]</obj_property>
       <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
    </wvobject>
    <wvobject fp_name="/fir_filter_tb/data_in_ready" type="logic">
@@ -40,6 +40,7 @@
    <wvobject fp_name="/fir_filter_tb/data_in" type="array">
       <obj_property name="ElementShortName">data_in[16:0]</obj_property>
       <obj_property name="ObjectShortName">data_in[16:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
    </wvobject>
    <wvobject fp_name="/fir_filter_tb/data_out_ready" type="logic">
       <obj_property name="ElementShortName">data_out_ready</obj_property>
@@ -76,8 +77,8 @@
       <obj_property name="ObjectShortName">FILTER_TAPS[31:0]</obj_property>
    </wvobject>
    <wvobject fp_name="/fir_filter_tb/dut/products" type="array">
-      <obj_property name="ElementShortName">products[31:0][28:0]</obj_property>
-      <obj_property name="ObjectShortName">products[31:0][28:0]</obj_property>
+      <obj_property name="ElementShortName">products[63:0][28:0]</obj_property>
+      <obj_property name="ObjectShortName">products[63:0][28:0]</obj_property>
       <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
    </wvobject>
    <wvobject fp_name="/fir_filter_tb/dut/data_in" type="array">
@@ -86,20 +87,339 @@
       <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
    </wvobject>
    <wvobject fp_name="/fir_filter_tb/dut/data_in_shift" type="array">
-      <obj_property name="ElementShortName">data_in_shift[31:0][16:0]</obj_property>
-      <obj_property name="ObjectShortName">data_in_shift[31:0][16:0]</obj_property>
+      <obj_property name="ElementShortName">data_in_shift[63:0][16:0]</obj_property>
+      <obj_property name="ObjectShortName">data_in_shift[63:0][16:0]</obj_property>
    </wvobject>
    <wvobject fp_name="/fir_filter_tb/dut/products" type="array">
-      <obj_property name="ElementShortName">products[31:0][28:0]</obj_property>
-      <obj_property name="ObjectShortName">products[31:0][28:0]</obj_property>
+      <obj_property name="ElementShortName">products[63:0][28:0]</obj_property>
+      <obj_property name="ObjectShortName">products[63:0][28:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <wvobject fp_name="/fir_filter_tb/dut/products[63]" type="array">
+         <obj_property name="ElementShortName">[63][28:0]</obj_property>
+         <obj_property name="ObjectShortName">[63][28:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/fir_filter_tb/dut/products[62]" type="array">
+         <obj_property name="ElementShortName">[62][28:0]</obj_property>
+         <obj_property name="ObjectShortName">[62][28:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/fir_filter_tb/dut/products[61]" type="array">
+         <obj_property name="ElementShortName">[61][28:0]</obj_property>
+         <obj_property name="ObjectShortName">[61][28:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/fir_filter_tb/dut/products[60]" type="array">
+         <obj_property name="ElementShortName">[60][28:0]</obj_property>
+         <obj_property name="ObjectShortName">[60][28:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/fir_filter_tb/dut/products[59]" type="array">
+         <obj_property name="ElementShortName">[59][28:0]</obj_property>
+         <obj_property name="ObjectShortName">[59][28:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/fir_filter_tb/dut/products[58]" type="array">
+         <obj_property name="ElementShortName">[58][28:0]</obj_property>
+         <obj_property name="ObjectShortName">[58][28:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/fir_filter_tb/dut/products[57]" type="array">
+         <obj_property name="ElementShortName">[57][28:0]</obj_property>
+         <obj_property name="ObjectShortName">[57][28:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/fir_filter_tb/dut/products[56]" type="array">
+         <obj_property name="ElementShortName">[56][28:0]</obj_property>
+         <obj_property name="ObjectShortName">[56][28:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/fir_filter_tb/dut/products[55]" type="array">
+         <obj_property name="ElementShortName">[55][28:0]</obj_property>
+         <obj_property name="ObjectShortName">[55][28:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/fir_filter_tb/dut/products[54]" type="array">
+         <obj_property name="ElementShortName">[54][28:0]</obj_property>
+         <obj_property name="ObjectShortName">[54][28:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/fir_filter_tb/dut/products[53]" type="array">
+         <obj_property name="ElementShortName">[53][28:0]</obj_property>
+         <obj_property name="ObjectShortName">[53][28:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/fir_filter_tb/dut/products[52]" type="array">
+         <obj_property name="ElementShortName">[52][28:0]</obj_property>
+         <obj_property name="ObjectShortName">[52][28:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/fir_filter_tb/dut/products[51]" type="array">
+         <obj_property name="ElementShortName">[51][28:0]</obj_property>
+         <obj_property name="ObjectShortName">[51][28:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/fir_filter_tb/dut/products[50]" type="array">
+         <obj_property name="ElementShortName">[50][28:0]</obj_property>
+         <obj_property name="ObjectShortName">[50][28:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/fir_filter_tb/dut/products[49]" type="array">
+         <obj_property name="ElementShortName">[49][28:0]</obj_property>
+         <obj_property name="ObjectShortName">[49][28:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/fir_filter_tb/dut/products[48]" type="array">
+         <obj_property name="ElementShortName">[48][28:0]</obj_property>
+         <obj_property name="ObjectShortName">[48][28:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/fir_filter_tb/dut/products[47]" type="array">
+         <obj_property name="ElementShortName">[47][28:0]</obj_property>
+         <obj_property name="ObjectShortName">[47][28:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/fir_filter_tb/dut/products[46]" type="array">
+         <obj_property name="ElementShortName">[46][28:0]</obj_property>
+         <obj_property name="ObjectShortName">[46][28:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/fir_filter_tb/dut/products[45]" type="array">
+         <obj_property name="ElementShortName">[45][28:0]</obj_property>
+         <obj_property name="ObjectShortName">[45][28:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/fir_filter_tb/dut/products[44]" type="array">
+         <obj_property name="ElementShortName">[44][28:0]</obj_property>
+         <obj_property name="ObjectShortName">[44][28:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/fir_filter_tb/dut/products[43]" type="array">
+         <obj_property name="ElementShortName">[43][28:0]</obj_property>
+         <obj_property name="ObjectShortName">[43][28:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/fir_filter_tb/dut/products[42]" type="array">
+         <obj_property name="ElementShortName">[42][28:0]</obj_property>
+         <obj_property name="ObjectShortName">[42][28:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/fir_filter_tb/dut/products[41]" type="array">
+         <obj_property name="ElementShortName">[41][28:0]</obj_property>
+         <obj_property name="ObjectShortName">[41][28:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/fir_filter_tb/dut/products[40]" type="array">
+         <obj_property name="ElementShortName">[40][28:0]</obj_property>
+         <obj_property name="ObjectShortName">[40][28:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/fir_filter_tb/dut/products[39]" type="array">
+         <obj_property name="ElementShortName">[39][28:0]</obj_property>
+         <obj_property name="ObjectShortName">[39][28:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/fir_filter_tb/dut/products[38]" type="array">
+         <obj_property name="ElementShortName">[38][28:0]</obj_property>
+         <obj_property name="ObjectShortName">[38][28:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/fir_filter_tb/dut/products[37]" type="array">
+         <obj_property name="ElementShortName">[37][28:0]</obj_property>
+         <obj_property name="ObjectShortName">[37][28:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/fir_filter_tb/dut/products[36]" type="array">
+         <obj_property name="ElementShortName">[36][28:0]</obj_property>
+         <obj_property name="ObjectShortName">[36][28:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/fir_filter_tb/dut/products[35]" type="array">
+         <obj_property name="ElementShortName">[35][28:0]</obj_property>
+         <obj_property name="ObjectShortName">[35][28:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/fir_filter_tb/dut/products[34]" type="array">
+         <obj_property name="ElementShortName">[34][28:0]</obj_property>
+         <obj_property name="ObjectShortName">[34][28:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/fir_filter_tb/dut/products[33]" type="array">
+         <obj_property name="ElementShortName">[33][28:0]</obj_property>
+         <obj_property name="ObjectShortName">[33][28:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/fir_filter_tb/dut/products[32]" type="array">
+         <obj_property name="ElementShortName">[32][28:0]</obj_property>
+         <obj_property name="ObjectShortName">[32][28:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/fir_filter_tb/dut/products[31]" type="array">
+         <obj_property name="ElementShortName">[31][28:0]</obj_property>
+         <obj_property name="ObjectShortName">[31][28:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/fir_filter_tb/dut/products[30]" type="array">
+         <obj_property name="ElementShortName">[30][28:0]</obj_property>
+         <obj_property name="ObjectShortName">[30][28:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/fir_filter_tb/dut/products[29]" type="array">
+         <obj_property name="ElementShortName">[29][28:0]</obj_property>
+         <obj_property name="ObjectShortName">[29][28:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/fir_filter_tb/dut/products[28]" type="array">
+         <obj_property name="ElementShortName">[28][28:0]</obj_property>
+         <obj_property name="ObjectShortName">[28][28:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/fir_filter_tb/dut/products[27]" type="array">
+         <obj_property name="ElementShortName">[27][28:0]</obj_property>
+         <obj_property name="ObjectShortName">[27][28:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/fir_filter_tb/dut/products[26]" type="array">
+         <obj_property name="ElementShortName">[26][28:0]</obj_property>
+         <obj_property name="ObjectShortName">[26][28:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/fir_filter_tb/dut/products[25]" type="array">
+         <obj_property name="ElementShortName">[25][28:0]</obj_property>
+         <obj_property name="ObjectShortName">[25][28:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/fir_filter_tb/dut/products[24]" type="array">
+         <obj_property name="ElementShortName">[24][28:0]</obj_property>
+         <obj_property name="ObjectShortName">[24][28:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/fir_filter_tb/dut/products[23]" type="array">
+         <obj_property name="ElementShortName">[23][28:0]</obj_property>
+         <obj_property name="ObjectShortName">[23][28:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/fir_filter_tb/dut/products[22]" type="array">
+         <obj_property name="ElementShortName">[22][28:0]</obj_property>
+         <obj_property name="ObjectShortName">[22][28:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/fir_filter_tb/dut/products[21]" type="array">
+         <obj_property name="ElementShortName">[21][28:0]</obj_property>
+         <obj_property name="ObjectShortName">[21][28:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/fir_filter_tb/dut/products[20]" type="array">
+         <obj_property name="ElementShortName">[20][28:0]</obj_property>
+         <obj_property name="ObjectShortName">[20][28:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/fir_filter_tb/dut/products[19]" type="array">
+         <obj_property name="ElementShortName">[19][28:0]</obj_property>
+         <obj_property name="ObjectShortName">[19][28:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/fir_filter_tb/dut/products[18]" type="array">
+         <obj_property name="ElementShortName">[18][28:0]</obj_property>
+         <obj_property name="ObjectShortName">[18][28:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/fir_filter_tb/dut/products[17]" type="array">
+         <obj_property name="ElementShortName">[17][28:0]</obj_property>
+         <obj_property name="ObjectShortName">[17][28:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/fir_filter_tb/dut/products[16]" type="array">
+         <obj_property name="ElementShortName">[16][28:0]</obj_property>
+         <obj_property name="ObjectShortName">[16][28:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/fir_filter_tb/dut/products[15]" type="array">
+         <obj_property name="ElementShortName">[15][28:0]</obj_property>
+         <obj_property name="ObjectShortName">[15][28:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/fir_filter_tb/dut/products[14]" type="array">
+         <obj_property name="ElementShortName">[14][28:0]</obj_property>
+         <obj_property name="ObjectShortName">[14][28:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/fir_filter_tb/dut/products[13]" type="array">
+         <obj_property name="ElementShortName">[13][28:0]</obj_property>
+         <obj_property name="ObjectShortName">[13][28:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/fir_filter_tb/dut/products[12]" type="array">
+         <obj_property name="ElementShortName">[12][28:0]</obj_property>
+         <obj_property name="ObjectShortName">[12][28:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/fir_filter_tb/dut/products[11]" type="array">
+         <obj_property name="ElementShortName">[11][28:0]</obj_property>
+         <obj_property name="ObjectShortName">[11][28:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/fir_filter_tb/dut/products[10]" type="array">
+         <obj_property name="ElementShortName">[10][28:0]</obj_property>
+         <obj_property name="ObjectShortName">[10][28:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/fir_filter_tb/dut/products[9]" type="array">
+         <obj_property name="ElementShortName">[9][28:0]</obj_property>
+         <obj_property name="ObjectShortName">[9][28:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/fir_filter_tb/dut/products[8]" type="array">
+         <obj_property name="ElementShortName">[8][28:0]</obj_property>
+         <obj_property name="ObjectShortName">[8][28:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/fir_filter_tb/dut/products[7]" type="array">
+         <obj_property name="ElementShortName">[7][28:0]</obj_property>
+         <obj_property name="ObjectShortName">[7][28:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/fir_filter_tb/dut/products[6]" type="array">
+         <obj_property name="ElementShortName">[6][28:0]</obj_property>
+         <obj_property name="ObjectShortName">[6][28:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/fir_filter_tb/dut/products[5]" type="array">
+         <obj_property name="ElementShortName">[5][28:0]</obj_property>
+         <obj_property name="ObjectShortName">[5][28:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/fir_filter_tb/dut/products[4]" type="array">
+         <obj_property name="ElementShortName">[4][28:0]</obj_property>
+         <obj_property name="ObjectShortName">[4][28:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/fir_filter_tb/dut/products[3]" type="array">
+         <obj_property name="ElementShortName">[3][28:0]</obj_property>
+         <obj_property name="ObjectShortName">[3][28:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/fir_filter_tb/dut/products[2]" type="array">
+         <obj_property name="ElementShortName">[2][28:0]</obj_property>
+         <obj_property name="ObjectShortName">[2][28:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/fir_filter_tb/dut/products[1]" type="array">
+         <obj_property name="ElementShortName">[1][28:0]</obj_property>
+         <obj_property name="ObjectShortName">[1][28:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/fir_filter_tb/dut/products[0]" type="array">
+         <obj_property name="ElementShortName">[0][28:0]</obj_property>
+         <obj_property name="ObjectShortName">[0][28:0]</obj_property>
+      </wvobject>
    </wvobject>
    <wvobject fp_name="/fir_filter_tb/dut/adder_0/data_in" type="array">
-      <obj_property name="ElementShortName">data_in[31:0][28:0]</obj_property>
-      <obj_property name="ObjectShortName">data_in[31:0][28:0]</obj_property>
+      <obj_property name="ElementShortName">data_in[63:0][28:0]</obj_property>
+      <obj_property name="ObjectShortName">data_in[63:0][28:0]</obj_property>
    </wvobject>
    <wvobject fp_name="/fir_filter_tb/dut/adder_0/adder" type="array">
-      <obj_property name="ElementShortName">adder[31:0][33:0]</obj_property>
-      <obj_property name="ObjectShortName">adder[31:0][33:0]</obj_property>
+      <obj_property name="ElementShortName">adder[63:0][33:0]</obj_property>
+      <obj_property name="ObjectShortName">adder[63:0][33:0]</obj_property>
    </wvobject>
    <wvobject fp_name="/fir_filter_tb/dut/adder_0/data_in_ready" type="logic">
       <obj_property name="ElementShortName">data_in_ready</obj_property>
@@ -118,8 +438,8 @@
       <obj_property name="ObjectShortName">data_in_ready</obj_property>
    </wvobject>
    <wvobject fp_name="/fir_filter_tb/dut/adder_0/data_out_ready_shift" type="array">
-      <obj_property name="ElementShortName">data_out_ready_shift[0:4]</obj_property>
-      <obj_property name="ObjectShortName">data_out_ready_shift[0:4]</obj_property>
+      <obj_property name="ElementShortName">data_out_ready_shift[0:5]</obj_property>
+      <obj_property name="ObjectShortName">data_out_ready_shift[0:5]</obj_property>
       <obj_property name="isExpanded"></obj_property>
       <obj_property name="Reversed">true</obj_property>
    </wvobject>

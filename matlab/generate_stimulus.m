@@ -1,7 +1,7 @@
 % Generates the stimulus files in the folder 
 % Call it with generate_stimulus("audioname") from command line and repo root dir
-% Note that audioname does not include path and extension. E.g. generate_stimulus("easemymind")
-% Can specify path and extension if necessary e.g. generate_stimulus("easemymind", "../music/", ".wav")
+% Note that audioname does not include path and extension. E.g. generate_stimulus("blowyourmind")
+% Can specify path and extension if necessary e.g. generate_stimulus("blowyourmind", "../music/", ".wav")
 % All stimulus files are in .csv format. They are single valued per row, with the number of rows being the length.
 function generate_stimulus(file, path, extension)
     arguments
@@ -18,9 +18,10 @@ function generate_stimulus(file, path, extension)
     end
     writematrix(output_1, "../stimulus/" + file + "_input_1.csv");
     writematrix(output_2, "../stimulus/" + file + "_input_2.csv");
-    % generate_magnitude(file)
-    % generate_fir_filter(file)
+    generate_magnitude(file)
     generate_moving_average(file)
+    generate_fir_filter(file)
+    generate_bpm_detection(file)
 end
 
 % Generates magnitude files from magnitude module
@@ -40,11 +41,20 @@ function generate_magnitude(file)
     writematrix(outputs, "../stimulus/" + file + "_magnitude.csv");
 end
 
-function generate_fir_filter(file)
+function generate_moving_average(file)
     arguments
         file (1, 1) string
     end
     inputs = readmatrix("../stimulus/" + file + "_magnitude.csv");
+    outputs = moving_average(inputs, 16);
+    writematrix(outputs, "../stimulus/" + file + "_moving_average.csv");
+end
+
+function generate_fir_filter(file)
+    arguments
+        file (1, 1) string
+    end
+    inputs = readmatrix("../stimulus/" + file + "_moving_average.csv");
     [coefficients, outputs] = fir_filter(inputs);
     filename = "../stimulus/" + "fir_filter_coefficients.mem";
     fd = fopen(filename, 'w');
@@ -56,14 +66,13 @@ function generate_fir_filter(file)
     writematrix(outputs, "../stimulus/" + file + "_fir_filter.csv")
 end
 
-function generate_moving_average(file)
+function generate_bpm_detection(file)
     arguments
         file (1, 1) string
     end
     inputs = readmatrix("../stimulus/" + file + "_fir_filter.csv");
-    outputs = moving_average(inputs, 64);
-    length(outputs)
-    plot_time(outputs, floor(44100 / 64), 1)
-    writematrix(outputs, "../stimulus/" + file + "_moving_average.csv");
+    [transients, bpms, average] = bpm_detection(inputs);
+    writematrix(transients, "../stimulus/" + file + "_transients.csv");
+    writematrix(bpms, "../stimulus/" + file + "_bpms.csv");
 end
 

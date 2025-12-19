@@ -2,7 +2,7 @@ function bpm_detection (file)
 
 %   Detects transients from magnitude CSV
 %
-%   bpm_detection("easemymind")
+%   bpm_detection("blowyourmind")
 %
 % Reads ../stimulus/<file>_magnitude.csv, runs an FIR filter (band-
 % limiting + moving average combined), uses adaptive thresholding and

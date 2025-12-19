@@ -1,8 +1,8 @@
 module moving_average #(
     parameter DATA_IN_BITS = 12,
     parameter DATA_OUT_BITS = 12,
-    parameter AVERAGE_NUM = 32,
-    parameter AVERAGE_BITS = 5
+    parameter AVERAGE_NUM = 16,
+    parameter AVERAGE_BITS = 4
 ) (
     input logic clk,
     input logic rst,

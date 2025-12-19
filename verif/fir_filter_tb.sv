@@ -6,7 +6,7 @@ module fir_filter_tb #(
     parameter DATA_IN_BITS = 17,
     parameter DATA_OUT_BITS = 17,
     parameter FILTER_BITS = 12,
-    parameter FILTER_TAPS = 32
+    parameter FILTER_TAPS = 64
 )();
 
     // DUT inputs/outputs
@@ -64,8 +64,8 @@ module fir_filter_tb #(
         done = 1'b0;
         data_in_ready = 1'b0;
 
-        data_in_file = "easemymind_magnitude.csv";
-        data_out_file = "easemymind_fir_filter.csv";
+        data_in_file = "blowyourmind_moving_average.csv";
+        data_out_file = "blowyourmind_fir_filter.csv";
         coefficients_file = "fir_filter_coefficients.mem";
         $readmemb(coefficients_file, filter_coefficients);
 

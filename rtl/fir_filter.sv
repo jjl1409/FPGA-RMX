@@ -1,10 +1,10 @@
 
 module adder_tree #(
     parameter DATA_IN_BITS = 29,
-    parameter DATA_IN_WIDTH = 32,
+    parameter DATA_IN_WIDTH = 64,
     parameter DATA_OUT_BITS = 17,
     parameter SUM_BITS = DATA_IN_BITS + $clog2(DATA_IN_BITS),
-    parameter STAGES = 5
+    parameter STAGES = 6
 ) (
     input logic clk,
     input logic rst,
@@ -39,7 +39,7 @@ module fir_filter #(
     parameter DATA_IN_BITS = 17,
     parameter DATA_OUT_BITS = 17,
     parameter FILTER_BITS = 12,
-    parameter FILTER_TAPS = 32,
+    parameter FILTER_TAPS = 64,
     parameter PRODUCT_BITS = DATA_IN_BITS + FILTER_BITS,
     parameter ADDER_BITS = PRODUCT_BITS + $clog2(DATA_IN_BITS + FILTER_BITS),
     parameter ADDER_STAGES = $clog2(FILTER_TAPS)

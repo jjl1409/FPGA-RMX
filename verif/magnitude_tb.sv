@@ -70,10 +70,10 @@ module magnitude_tb #(
         data_in_2 = 0;
         data_in_ready = 1'b0;
 
-        data_in_1_file = "easemymind_input_1.csv";
-        data_in_2_file = "easemymind_input_2.csv";
-        square_sum_file = "easemymind_square_sum.csv";
-        magnitude_file = "easemymind_magnitude.csv";
+        data_in_1_file = "blowyourmind_input_1.csv";
+        data_in_2_file = "blowyourmind_input_2.csv";
+        square_sum_file = "blowyourmind_square_sum.csv";
+        magnitude_file = "blowyourmind_magnitude.csv";
         
         fd = $fopen(data_in_1_file, "r");
         if (fd == 0) begin

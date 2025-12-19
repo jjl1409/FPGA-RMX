@@ -11,15 +11,15 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="185.417 ns"></ZoomStartTime>
-      <ZoomEndTime time="632.918 ns"></ZoomEndTime>
+      <ZoomStartTime time="77.167 ns"></ZoomStartTime>
+      <ZoomEndTime time="1,174.168 ns"></ZoomEndTime>
       <Cursor1Time time="260.000 ns"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="248"></NameColumnWidth>
-      <ValueColumnWidth column_width="113"></ValueColumnWidth>
+      <ValueColumnWidth column_width="109"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="13" />
+   <WVObjectSize size="12" />
    <wvobject fp_name="/moving_average_tb/clk" type="logic">
       <obj_property name="ElementShortName">clk</obj_property>
       <obj_property name="ObjectShortName">clk</obj_property>
@@ -33,8 +33,8 @@
       <obj_property name="ObjectShortName">data_in_ready</obj_property>
    </wvobject>
    <wvobject fp_name="/moving_average_tb/data_in" type="array">
-      <obj_property name="ElementShortName">data_in[23:0]</obj_property>
-      <obj_property name="ObjectShortName">data_in[23:0]</obj_property>
+      <obj_property name="ElementShortName">data_in[16:0]</obj_property>
+      <obj_property name="ObjectShortName">data_in[16:0]</obj_property>
       <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
    </wvobject>
    <wvobject fp_name="/moving_average_tb/data_out_ready" type="logic">
@@ -42,38 +42,33 @@
       <obj_property name="ObjectShortName">data_out_ready</obj_property>
    </wvobject>
    <wvobject fp_name="/moving_average_tb/dut/average_add" type="array">
-      <obj_property name="ElementShortName">average_add[24:0]</obj_property>
-      <obj_property name="ObjectShortName">average_add[24:0]</obj_property>
+      <obj_property name="ElementShortName">average_add[17:0]</obj_property>
+      <obj_property name="ObjectShortName">average_add[17:0]</obj_property>
       <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
    </wvobject>
    <wvobject fp_name="/moving_average_tb/dut/average_subtract" type="array">
-      <obj_property name="ElementShortName">average_subtract[24:0]</obj_property>
-      <obj_property name="ObjectShortName">average_subtract[24:0]</obj_property>
+      <obj_property name="ElementShortName">average_subtract[17:0]</obj_property>
+      <obj_property name="ObjectShortName">average_subtract[17:0]</obj_property>
       <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
    </wvobject>
    <wvobject fp_name="/moving_average_tb/dut/average_sum" type="array">
-      <obj_property name="ElementShortName">average_sum[24:0]</obj_property>
-      <obj_property name="ObjectShortName">average_sum[24:0]</obj_property>
-      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject fp_name="/moving_average_tb/dut/average_shift" type="array">
-      <obj_property name="ElementShortName">average_shift[24:0]</obj_property>
-      <obj_property name="ObjectShortName">average_shift[24:0]</obj_property>
+      <obj_property name="ElementShortName">average_sum[17:0]</obj_property>
+      <obj_property name="ObjectShortName">average_sum[17:0]</obj_property>
       <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
    </wvobject>
    <wvobject fp_name="/moving_average_tb/dut/average" type="array">
-      <obj_property name="ElementShortName">average[24:0]</obj_property>
-      <obj_property name="ObjectShortName">average[24:0]</obj_property>
+      <obj_property name="ElementShortName">average[17:0]</obj_property>
+      <obj_property name="ObjectShortName">average[17:0]</obj_property>
       <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
    </wvobject>
    <wvobject fp_name="/moving_average_tb/data_out_expected" type="array">
-      <obj_property name="ElementShortName">data_out_expected[23:0]</obj_property>
-      <obj_property name="ObjectShortName">data_out_expected[23:0]</obj_property>
+      <obj_property name="ElementShortName">data_out_expected[16:0]</obj_property>
+      <obj_property name="ObjectShortName">data_out_expected[16:0]</obj_property>
       <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
    </wvobject>
    <wvobject fp_name="/moving_average_tb/data_out" type="array">
-      <obj_property name="ElementShortName">data_out[23:0]</obj_property>
-      <obj_property name="ObjectShortName">data_out[23:0]</obj_property>
+      <obj_property name="ElementShortName">data_out[16:0]</obj_property>
+      <obj_property name="ObjectShortName">data_out[16:0]</obj_property>
       <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
    </wvobject>
    <wvobject fp_name="/moving_average_tb/done" type="logic">
