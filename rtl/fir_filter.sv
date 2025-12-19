@@ -42,16 +42,21 @@ module fir_filter #(
     parameter FILTER_TAPS = 64,
     parameter PRODUCT_BITS = DATA_IN_BITS + FILTER_BITS,
     parameter ADDER_BITS = PRODUCT_BITS + $clog2(DATA_IN_BITS + FILTER_BITS),
-    parameter ADDER_STAGES = $clog2(FILTER_TAPS)
+    parameter ADDER_STAGES = $clog2(FILTER_TAPS),
+    parameter string COEFFICIENTS_FILE
 ) (
     input logic clk,
     input logic rst,
     input logic data_in_ready,
     input logic [DATA_IN_BITS - 1:0] data_in,
-    input logic [FILTER_BITS - 1:0] filter_coefficients [FILTER_TAPS - 1:0],
     output logic data_out_ready,
     output logic [DATA_OUT_BITS - 1:0] data_out
 );
+    // Load coefficients
+    logic [FILTER_BITS - 1:0] filter_coefficients [0:FILTER_TAPS - 1];
+    initial begin
+        $readmemb(COEFFICIENTS_FILE, filter_coefficients);
+    end
     // Stage 0: Shift register
     logic products_in_ready;
     logic products_out_ready;

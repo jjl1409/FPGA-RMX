@@ -53,7 +53,7 @@ function test_bpm_detection
     threshold = 7e4;
     min_period = 1181;
     max_period = 1378;
-    [transients, bpms, average] = bpm_detection(inputs, threshold, min_period, max_period, fs);
+    [transient, bpm, average] = bpm_detection(inputs, threshold, min_period, max_period, fs);
     % Draw plot 1 for beat detection transients
     plot_title = "Beat Detection Transients";
     xlabels = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60];
@@ -61,8 +61,8 @@ function test_bpm_detection
     tiledlayout(2,1)
     nexttile
     stem(x, inputs, 'Marker', 'none')
-    for i = 1:length(transients)
-        if transients(i) == 1
+    for i = 1:length(transient)
+        if transient(i) == 1
             xline(i / fs, 'red')
         end
     end
@@ -75,12 +75,12 @@ function test_bpm_detection
     % Draw plot 2 for bpm over time
     nexttile
     x = [0];
-    y = [fs * 60 / bpms(1)];
+    y = [fs * 60 / bpm(1)];
     % Only graph point when we have change in BPM
-    for (i = 2:length(bpms))
-        if bpms(i) ~= bpms(i - 1)
+    for (i = 2:length(bpm))
+        if bpm(i) ~= bpm(i - 1)
             x = [x, i / fs];
-            y = [y, fs * 60 / bpms(i)];
+            y = [y, fs * 60 / bpm(i)];
         end
     end
     plot_title = "Expected BPM: 128, Average BPM: " + average;

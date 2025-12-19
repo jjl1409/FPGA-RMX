@@ -3,22 +3,37 @@ module top #(
     parameter I2S2_CLK_DIV_BITS = 2,
     parameter I2S2_COUNT_BITS = 9,
     parameter AUDIO_DATA_BITS = 21,
-    parameter LED_BITS = 14,
+    parameter LED_BITS = 16,
     parameter LED_COUNT_BITS = 21,
     parameter LED_COUNT_PERIOD = 2 ** LED_COUNT_BITS,
-    parameter DECIMAL_BITS = 12,
-    parameter BINARY_BITS = 4,
-    parameter BINARY_WIDTH = 4,
+    parameter BINARY_BITS = 12,
+    parameter DECIMAL_BITS = 4,
+    parameter DECIMAL_WIDTH = 4,
     parameter CATHODE_BITS = 8,
     parameter ANODE_BITS = 4,
     parameter SEVEN_SEGMENT_DISPLAY_COUNT_BITS = 27,
     parameter SEVEN_SEGMENT_DISPLAY_REFRESH_BITS = 20,
-    parameter AVERAGE_BITS = 5,
+    parameter AVERAGE_BITS = 4,
     parameter AVERAGE_NUM = 2 ** AVERAGE_BITS,
     parameter SQUARE_ROOT_BITS = 13,
     parameter SQUARE_SUM_OUT_BITS = 33,
     parameter MAGNITUDE_DATA_IN_BITS = 16,
-    parameter DSP_DATA_BITS = 17
+    parameter DSP_DATA_BITS = 17,
+    parameter FILTER_BITS = 12,
+    parameter FILTER_TAPS = 64,
+    parameter COEFFICIENTS_FILE = "fir_filter_coefficients.mem",
+    parameter BPM_BITS = 11,
+    parameter THRESHOLD = 80000,
+    parameter MIN_PERIOD = 1181,
+    parameter MAX_PERIOD = 1378,
+    parameter SAMPLING_RATE = 44100,
+    parameter AVERAGE_BPM_BITS = 8,
+    parameter AVERAGE_BPM_NUM = 2 ** AVERAGE_BPM_BITS,
+    parameter AVERAGE_BPM_COUNT_BITS = 21,
+    parameter SWITCH_BITS = 4,
+    parameter TRANSIENT_DECIMATION_BITS = 6,
+    parameter TRANSIENT_DEPTH = 26495,
+    parameter string TRANSIENT_FILE = "snare.mem"
 )(
     input logic  sys_clk,
     output logic tx_mclk,
@@ -29,6 +44,7 @@ module top #(
     output logic rx_lrck,
     output logic rx_sclk,
     input  logic rx_data,
+    input logic [SWITCH_BITS - 1:0] sw,
     
     output logic [LED_BITS - 1:0] leds,
     output logic [ANODE_BITS - 1:0] anode,
@@ -78,8 +94,17 @@ module top #(
         .in_data_r (in_data_r),
         .out_ready (i2s2_out_ready)
     );
-    assign in_data_l = out_data_l;
-    assign in_data_r = out_data_r;
+    
+    logic audio_out_ready_prev;
+    logic audio_out_ready;
+    always @(posedge clk) begin
+        audio_out_ready_prev <= i2s2_out_ready;
+        if (!audio_out_ready_prev && i2s2_out_ready) begin
+            audio_out_ready <= 1'b1;
+        end else begin
+            audio_out_ready <= 1'b0;
+        end
+    end
 
     // Magnitude module to take RMS of left and right audio signals
     logic magnitude_data_out_ready;
@@ -92,18 +117,17 @@ module top #(
     ) magnitude_i (
         .clk (clk),
         .rst (rst),
-        .data_in_ready (i2s2_out_ready),
+        .data_in_ready (audio_out_ready),
         .data_in_1 (out_data_r[AUDIO_DATA_BITS - 1 -: MAGNITUDE_DATA_IN_BITS]),
         .data_in_2 (out_data_l[AUDIO_DATA_BITS - 1 -: MAGNITUDE_DATA_IN_BITS]),
         .data_out_ready (magnitude_data_out_ready),
         .data_out (magnitude_data_out)
     );    
     
-    // Double moving average modules to measure power
-    logic moving_average_data_out_ready_1;
-    logic [DSP_DATA_BITS - 1:0] moving_average_data_out_1;
-    logic moving_average_data_out_ready_2;
-    logic [DSP_DATA_BITS - 1:0] moving_average_data_out_2;
+    // Moving average module to decimate/average every 16 inputs
+    logic moving_average_data_out_ready;
+    logic [DSP_DATA_BITS - 1:0] moving_average_data_out;
+    
     
     moving_average #(
         .DATA_IN_BITS (DSP_DATA_BITS),
@@ -115,66 +139,141 @@ module top #(
         .rst (rst),
         .data_in_ready (magnitude_data_out_ready),
         .data_in (magnitude_data_out),
-        .data_out_ready (moving_average_data_out_ready_1),
-        .data_out (moving_average_data_out_1)
+        .data_out_ready (moving_average_data_out_ready),
+        .data_out (moving_average_data_out)
     );
-    
-    moving_average #(
+
+    // FIR filter module to apply bandpass filter over 64 inputs
+    logic fir_filter_data_out_ready;
+    logic [DSP_DATA_BITS - 1:0] fir_filter_data_out; 
+
+    fir_filter #(
         .DATA_IN_BITS (DSP_DATA_BITS),
         .DATA_OUT_BITS (DSP_DATA_BITS),
-        .AVERAGE_NUM (AVERAGE_NUM),
-        .AVERAGE_BITS (AVERAGE_BITS)
+        .FILTER_BITS (FILTER_BITS),
+        .FILTER_TAPS (FILTER_TAPS),
+        .COEFFICIENTS_FILE (COEFFICIENTS_FILE)
+    ) fir_filter_i (
+        .clk (clk),
+        .rst (rst),
+        .data_in_ready (moving_average_data_out_ready),
+        .data_in (moving_average_data_out),
+        .data_out_ready (fir_filter_data_out_ready),
+        .data_out (fir_filter_data_out)
+    );
+
+    // BPM detection module to get BPM and transient information
+    logic bpm_detection_data_out_ready;
+    logic transient_out;
+    logic [BPM_BITS - 1:0] bpm_out;
+
+    bpm_detection #(
+        .DATA_IN_BITS (DSP_DATA_BITS),
+        .BPM_BITS (BPM_BITS),
+        .THRESHOLD (THRESHOLD),
+        .MIN_PERIOD (MIN_PERIOD),
+        .MAX_PERIOD (MAX_PERIOD)
+    ) bpm_detection_i (
+        .clk (clk),
+        .rst (rst),
+        .data_in_ready (fir_filter_data_out_ready),
+        .data_in (fir_filter_data_out),
+        .data_out_ready(bpm_detection_data_out_ready),
+        .transient_out (transient_out),
+        .bpm_out (bpm_out)
+    );
+    // Extra moving average for bpm_out
+    
+    logic [AVERAGE_BPM_COUNT_BITS - 1:0] average_bpm_count = '0;
+    logic average_bpm_in_ready;
+    logic average_bpm_out_ready;
+    logic [AVERAGE_BPM_BITS + BPM_BITS - 1:0] average_bpm_out;
+    
+    always_ff @(posedge clk) begin
+        average_bpm_count <= average_bpm_count + 1;
+    end
+    assign average_bpm_in_ready = average_bpm_count == 0;   
+    
+    moving_average #(
+        .DATA_IN_BITS (BPM_BITS + AVERAGE_BPM_BITS),
+        .DATA_OUT_BITS (BPM_BITS + AVERAGE_BPM_BITS),
+        .AVERAGE_NUM (AVERAGE_BPM_NUM),
+        .AVERAGE_BITS (AVERAGE_BPM_BITS)
     ) moving_average_2 (
         .clk (clk),
         .rst (rst),
-        .data_in_ready (moving_average_data_out_ready_1),
-        .data_in (moving_average_data_out_1),
-        .data_out_ready (moving_average_data_out_ready_2),
-        .data_out (moving_average_data_out_2)
+        .data_in_ready (average_bpm_in_ready),
+        .data_in ({bpm_out, {AVERAGE_BPM_BITS{1'b0}}}),
+        .data_out_ready (average_bpm_out_ready),
+        .data_out (average_bpm_out)
     );
-        
+
+    // Transient to play snare sound based on switches
+    transient #(
+        .SWITCH_BITS (SWITCH_BITS),
+        .BPM_BITS (BPM_BITS),
+        .DATA_IN_BITS (AUDIO_DATA_BITS),
+        .DATA_OUT_BITS (AUDIO_DATA_BITS),
+        .DECIMATION_BITS (TRANSIENT_DECIMATION_BITS),
+        .TRANSIENT_DEPTH (TRANSIENT_DEPTH),
+        .TRANSIENT_FILE (TRANSIENT_FILE)
+    ) transient_i (
+        .clk (clk),
+        .rst (rst),
+        .data_in_l (out_data_l),
+        .data_in_r (out_data_r),
+        .transient (transient_out),
+        .bpm (bpm_out),
+        .switch (sw),
+        .data_out_l (in_data_l),
+        .data_out_r (in_data_r)
+    );
+    
+    // samples_to_bpm module to convert bpm_out (in samples between beats) to bpm in binary
+    logic [BINARY_BITS - 1:0] samples_to_bpm_out;
+    samples_to_bpm #(
+        .DATA_IN_BITS (BPM_BITS),
+        .DATA_OUT_BITS (BINARY_BITS),
+        .MIN_PERIOD (MIN_PERIOD),
+        .MAX_PERIOD (MAX_PERIOD),
+        .SAMPLING_RATE (SAMPLING_RATE),
+        .DECIMATION_FACTOR (AVERAGE_NUM)
+    ) samples_to_bpm_i (
+        .clk (clk),
+        .rst (rst),
+        .data_in (average_bpm_out[BPM_BITS + AVERAGE_BPM_BITS - 1 -:BPM_BITS]),
+        .data_out (samples_to_bpm_out)
+    );
+
+    
     // led_display module
     
     led_display #(
         .LED_BITS (LED_BITS),
         .LED_COUNT_BITS (LED_COUNT_BITS),
-        .LED_COUNT_PERIOD (LED_COUNT_PERIOD),
         .DATA_IN_BITS (DSP_DATA_BITS)
     ) led_display_1 (
         .clk (clk),
         .rst (rst),
-        .data_in (moving_average_data_out_2),
+        .data_in (moving_average_data_out),
+        .transient (transient_out),
         .leds (leds)
     );
 
     // seven segment display + double dabbler module
     logic double_dabble_data_in_ready = 1'b1;
     logic double_dabble_data_out_ready;
-    logic [DECIMAL_BITS - 1:0] double_dabble_data_in = 12'd1200;
-    logic [BINARY_BITS - 1:0] double_dabble_data_out [BINARY_WIDTH - 1:0];
-    
-    // test seven segment display incrementer
-    logic [26:0] count;
-    always_ff @(posedge clk) begin
-        count <= count + 1;
-        if (count == 0) begin
-            if (double_dabble_data_in == 12'd1400) begin
-                double_dabble_data_in <= 12'd1200;
-            end else begin
-                double_dabble_data_in <= double_dabble_data_in + 1;
-            end
-        end
-    end
+    logic [DECIMAL_BITS - 1:0] double_dabble_data_out [DECIMAL_WIDTH - 1:0];
 
     double_dabble #(
-        .DATA_IN_BITS (DECIMAL_BITS),
-        .DATA_OUT_BITS (BINARY_BITS),
-        .DATA_OUT_WIDTH (BINARY_WIDTH)
+        .DATA_IN_BITS (BINARY_BITS),
+        .DATA_OUT_BITS (DECIMAL_BITS),
+        .DATA_OUT_WIDTH (DECIMAL_WIDTH)
     ) double_dabble_1 (
         .clk (clk),
         .rst (rst),
         .data_in_ready (double_dabble_data_in_ready),
-        .data_in (double_dabble_data_in),
+        .data_in (samples_to_bpm_out),
         .data_out_ready (double_dabble_data_out_ready),
         .data_out (double_dabble_data_out)
     );
@@ -182,8 +281,8 @@ module top #(
     seven_segment_display #(
         .CATHODE_BITS (CATHODE_BITS),
         .ANODE_BITS (ANODE_BITS),
-        .DATA_IN_BITS (BINARY_BITS),
-        .DATA_IN_WIDTH (BINARY_WIDTH),
+        .DATA_IN_BITS (DECIMAL_BITS),
+        .DATA_IN_WIDTH (DECIMAL_WIDTH),
         .COUNT_BITS (SEVEN_SEGMENT_DISPLAY_COUNT_BITS),
         .REFRESH_BITS (SEVEN_SEGMENT_DISPLAY_REFRESH_BITS)
     ) seven_segment_display_1 (

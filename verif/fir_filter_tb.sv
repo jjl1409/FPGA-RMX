@@ -6,7 +6,8 @@ module fir_filter_tb #(
     parameter DATA_IN_BITS = 17,
     parameter DATA_OUT_BITS = 17,
     parameter FILTER_BITS = 12,
-    parameter FILTER_TAPS = 64
+    parameter FILTER_TAPS = 64,
+    parameter COEFFICIENTS_FILE = "fir_filter_coefficients.mem"
 )();
 
     // DUT inputs/outputs
@@ -14,7 +15,6 @@ module fir_filter_tb #(
     logic rst;
     logic data_in_ready;
     logic [DATA_IN_BITS - 1:0] data_in;
-    logic [FILTER_BITS - 1:0] filter_coefficients [FILTER_TAPS - 1:0];
     logic data_out_ready;
     logic [DATA_OUT_BITS - 1:0] data_out;
 
@@ -23,13 +23,13 @@ module fir_filter_tb #(
         .DATA_IN_BITS (DATA_IN_BITS),
         .DATA_OUT_BITS (DATA_OUT_BITS),
         .FILTER_BITS (FILTER_BITS),
-        .FILTER_TAPS (FILTER_TAPS)
+        .FILTER_TAPS (FILTER_TAPS),
+        .COEFFICIENTS_FILE (COEFFICIENTS_FILE)
     ) dut (
         .clk (clk),
         .rst (rst),
         .data_in_ready (data_in_ready),
         .data_in (data_in),
-        .filter_coefficients (filter_coefficients),
         .data_out_ready (data_out_ready),
         .data_out (data_out)
     );
@@ -45,7 +45,6 @@ module fir_filter_tb #(
     // Stimulus/testing logic
     string data_in_file;
     string data_out_file;
-    string coefficients_file;
     string line;
     integer fd;
 
@@ -66,8 +65,6 @@ module fir_filter_tb #(
 
         data_in_file = "blowyourmind_moving_average.csv";
         data_out_file = "blowyourmind_fir_filter.csv";
-        coefficients_file = "fir_filter_coefficients.mem";
-        $readmemb(coefficients_file, filter_coefficients);
 
         fd = $fopen(data_in_file, "r");
         if (fd == 0) begin

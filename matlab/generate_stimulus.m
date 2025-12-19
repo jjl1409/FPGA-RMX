@@ -16,12 +16,13 @@ function generate_stimulus(file, path, extension)
         output_1(i, 1) = typecast(samps(i, 1), 'uint16');
         output_2(i, 1) = typecast(samps(i, 1), 'uint16');
     end
-    writematrix(output_1, "../stimulus/" + file + "_input_1.csv");
-    writematrix(output_2, "../stimulus/" + file + "_input_2.csv");
-    generate_magnitude(file)
-    generate_moving_average(file)
-    generate_fir_filter(file)
-    generate_bpm_detection(file)
+    % writematrix(output_1, "../stimulus/" + file + "_input_1.csv");
+    % writematrix(output_2, "../stimulus/" + file + "_input_2.csv");
+    % generate_magnitude(file)
+    % generate_moving_average(file)
+    % generate_fir_filter(file)
+    % generate_bpm_detection(file)
+    generate_transient("snare")
 end
 
 % Generates magnitude files from magnitude module
@@ -71,8 +72,26 @@ function generate_bpm_detection(file)
         file (1, 1) string
     end
     inputs = readmatrix("../stimulus/" + file + "_fir_filter.csv");
-    [transients, bpms, average] = bpm_detection(inputs);
-    writematrix(transients, "../stimulus/" + file + "_transients.csv");
-    writematrix(bpms, "../stimulus/" + file + "_bpms.csv");
+    [transient, bpm, average] = bpm_detection(inputs);
+    writematrix(transient, "../stimulus/" + file + "_transient.csv");
+    writematrix(bpm, "../stimulus/" + file + "_bpm.csv");
 end
+
+function generate_transient(file)
+    arguments
+        file (1, 1) string
+    end
+    outputs = audioread("../music/" + file + ".wav", "native");
+    outputs = outputs(:);
+
+    filename = "../stimulus/" + file + ".mem";
+    fd = fopen(filename, 'w');
+    for i = 1:length(outputs)
+        outputs(i) = typecast(outputs(i), 'uint32');
+        % dec2bin(outputs(i), 24)
+        fwrite(fd, dec2bin(outputs(i), 24));
+        fwrite(fd, newline);
+    end
+    fclose(fd);
+end    
 

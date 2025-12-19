@@ -126,7 +126,7 @@ writematrix(beats_ds, fullfile(stimdir_full, file + beats_out_suffix));
 writematrix(beat_times, fullfile(stimdir_full, file + beat_times_out_suffix));
 
 % Print summary
-fprintf("bpm_detection_from_magnitude: detected %d transients (beats).\n", length(locs));
+fprintf("bpm_detection_from_magnitude: detected %d transient (beats).\n", length(locs));
 fprintf("Downsampled processing rate = %.2f Hz (decimation factor = %d).\n", Fs_proc, ds_factor);
 fprintf("Saved 0/1 beat vector to: %s\n", fullfile(stimdir_full, file + beats_out_suffix));
 fprintf("Saved beat times to: %s\n", fullfile(stimdir_full, file + beat_times_out_suffix));
