@@ -87,7 +87,7 @@ module magnitude #(
 
     square_sum #(
         .DATA_IN_BITS (DATA_IN_BITS)
-    ) square_sum_1 (
+    ) square_sum (
         .clk (clk),
         .data_in_ready (data_in_ready),
         .data_in_1 (data_in_1),

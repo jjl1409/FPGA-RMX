@@ -6,12 +6,12 @@
 function outputs = moving_average(inputs, average_taps)
     arguments
         inputs (1, :) uint32
-        average_taps (1, 1) double = 32
+        average_taps (1, 1) double = 64
     end
     % inputs = repmat(319, 1, 320); 
     inputs = floor(transpose(inputs) ./ average_taps);
     outputs = zeros(floor(length(inputs) / average_taps), 1);
-    for i = 1:length(outputs)
+    for i = 1:3
         outputs(i) = sum(inputs((i - 1) * average_taps + 1:i * (average_taps)));
     end
     

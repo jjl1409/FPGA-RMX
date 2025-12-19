@@ -43,22 +43,22 @@ module magnitude_tb #(
     integer fd;
     string data_in_1_file;
     string data_in_2_file;
-    string square_sum_1_file;
-    string magnitude_1_file;
+    string square_sum_file;
+    string magnitude_file;
     string line;
 
     logic [DATA_IN_BITS - 1:0] data_in_1_q [$];
     logic [DATA_IN_BITS - 1:0] data_in_2_q [$];
-    logic [SQUARE_SUM_OUT_BITS - 1:0] square_sum_1_q [$];
-    logic [DATA_OUT_BITS - 1:0] magnitude_1_q [$];
+    logic [SQUARE_SUM_OUT_BITS - 1:0] square_sum_q [$];
+    logic [DATA_OUT_BITS - 1:0] magnitude_q [$];
 
     logic [DATA_IN_BITS - 1:0] data_in_1_read;
     logic [DATA_IN_BITS - 1:0] data_in_2_read;
-    logic [SQUARE_SUM_OUT_BITS - 1:0] square_sum_1_read;
-    logic [DATA_OUT_BITS - 1:0] magnitude_1_read;
+    logic [SQUARE_SUM_OUT_BITS - 1:0] square_sum_read;
+    logic [DATA_OUT_BITS - 1:0] magnitude_read;
 
-    logic [SQUARE_SUM_OUT_BITS - 1:0] square_sum_1_expected;
-    logic [DATA_OUT_BITS - 1:0] magnitude_1_expected;
+    logic [SQUARE_SUM_OUT_BITS - 1:0] square_sum_expected;
+    logic [DATA_OUT_BITS - 1:0] magnitude_expected;
     logic done;
 
 
@@ -72,8 +72,8 @@ module magnitude_tb #(
 
         data_in_1_file = "easemymind_input_1.csv";
         data_in_2_file = "easemymind_input_2.csv";
-        square_sum_1_file = "easemymind_square_sum_1.csv";
-        magnitude_1_file = "easemymind_magnitude_1.csv";
+        square_sum_file = "easemymind_square_sum.csv";
+        magnitude_file = "easemymind_magnitude.csv";
         
         fd = $fopen(data_in_1_file, "r");
         if (fd == 0) begin
@@ -97,25 +97,25 @@ module magnitude_tb #(
         end
         $fclose(fd);
 
-        fd = $fopen(square_sum_1_file, "r");
+        fd = $fopen(square_sum_file, "r");
         if (fd == 0) begin
-            $display("Error: Could not open %s", square_sum_1_file);
+            $display("Error: Could not open %s", square_sum_file);
             $fatal;
         end
         while ($fgets(line, fd)) begin
-            $sscanf(line, "%d", square_sum_1_read);
-            square_sum_1_q.push_back(square_sum_1_read);
+            $sscanf(line, "%d", square_sum_read);
+            square_sum_q.push_back(square_sum_read);
         end
         $fclose(fd);
 
-        fd = $fopen(magnitude_1_file, "r");
+        fd = $fopen(magnitude_file, "r");
         if (fd == 0) begin
-            $display("Error: Could not open %s", magnitude_1_file);
+            $display("Error: Could not open %s", magnitude_file);
             $fatal;
         end
         while ($fgets(line, fd)) begin
-            $sscanf(line, "%d", magnitude_1_read);
-            magnitude_1_q.push_back(magnitude_1_read);
+            $sscanf(line, "%d", magnitude_read);
+            magnitude_q.push_back(magnitude_read);
         end
         $fclose(fd);
         
@@ -124,8 +124,8 @@ module magnitude_tb #(
         $display("%t: Stimulus files loaded.", $time);
         $display("%t: Data in 1 loaded: %d samples.", $time, data_in_1_q.size());
         $display("%t: Data in 2 loaded: %d samples.", $time, data_in_2_q.size());
-        $display("%t: Square sum 1 loaded: %d samples.", $time, square_sum_1_q.size());
-        $display("%t: Magnitude 1 loaded: %d samples.", $time, magnitude_1_q.size());
+        $display("%t: Square sum 1 loaded: %d samples.", $time, square_sum_q.size());
+        $display("%t: Magnitude 1 loaded: %d samples.", $time, magnitude_q.size());
         @(posedge clk);
         repeat (50) @(posedge clk);
 
@@ -154,19 +154,19 @@ module magnitude_tb #(
     // Checker
     always @(posedge clk) begin
         if (dut.square_sum_out_ready) begin
-            if (square_sum_1_q.size() > 0) begin
-                square_sum_1_expected = square_sum_1_q.pop_front;
-                if (dut.square_sum_out !== square_sum_1_expected) begin
-                    $display("%t: Mismatch in square sum data out: Expected %d, got %d", $time, square_sum_1_expected, dut.square_sum_out);
+            if (square_sum_q.size() > 0) begin
+                square_sum_expected = square_sum_q.pop_front;
+                if (dut.square_sum_out !== square_sum_expected) begin
+                    $display("%t: Mismatch in square sum data out: Expected %d, got %d", $time, square_sum_expected, dut.square_sum_out);
                     $fatal;
                 end
             end
         end
         if (data_out_ready) begin 
-            if (magnitude_1_q.size() > 0) begin
-                magnitude_1_expected = magnitude_1_q.pop_front;
-                if (data_out !== magnitude_1_expected) begin
-                    $display("%t: Mismatch in magnitude data out: Expected %d, got %d", $time, magnitude_1_expected, data_out);
+            if (magnitude_q.size() > 0) begin
+                magnitude_expected = magnitude_q.pop_front;
+                if (data_out !== magnitude_expected) begin
+                    $display("%t: Mismatch in magnitude data out: Expected %d, got %d", $time, magnitude_expected, data_out);
                     $fatal;
                 end
             end else begin

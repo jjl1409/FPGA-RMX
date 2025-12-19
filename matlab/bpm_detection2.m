@@ -36,7 +36,7 @@ function bpm_detection2(file)
         stimdir_full = stimdir;
     end
     
-    csvpath = fullfile(stimdir_full, file + "_magnitude_1.csv");
+    csvpath = fullfile(stimdir_full, file + "_magnitude.csv");
     if ~isfile(csvpath)
         error("Magnitude CSV not found: %s", csvpath);
     end

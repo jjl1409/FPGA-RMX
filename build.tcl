@@ -37,8 +37,8 @@
 #    "C:/Users/JJBB2/FPGA-RMX/ip/clk_wiz_0.xci"
 #    "C:/Users/JJBB2/FPGA-RMX/rtl/moving_average.sv"
 #    "C:/Users/JJBB2/FPGA-RMX/constraints/Basys-3-Master.xdc"
-#    "C:/Users/JJBB2/FPGA-RMX/stimulus/easemymind_square_sum_1.csv"
-#    "C:/Users/JJBB2/FPGA-RMX/stimulus/easemymind_magnitude_1.csv"
+#    "C:/Users/JJBB2/FPGA-RMX/stimulus/easemymind_square_sum.csv"
+#    "C:/Users/JJBB2/FPGA-RMX/stimulus/easemymind_magnitude.csv"
 #    "C:/Users/JJBB2/FPGA-RMX/stimulus/easemymind_input_2.csv"
 #    "C:/Users/JJBB2/FPGA-RMX/stimulus/easemymind_input_1.csv"
 #    "C:/Users/JJBB2/FPGA-RMX/verif/magnitude_tb_behav.wcfg"
@@ -74,8 +74,8 @@ proc checkRequiredFiles { origin_dir} {
  "[file normalize "$origin_dir/ip/clk_wiz_0.xci"]"\
  "[file normalize "$origin_dir/rtl/moving_average.sv"]"\
  "[file normalize "$origin_dir/constraints/Basys-3-Master.xdc"]"\
- "[file normalize "$origin_dir/stimulus/easemymind_square_sum_1.csv"]"\
- "[file normalize "$origin_dir/stimulus/easemymind_magnitude_1.csv"]"\
+ "[file normalize "$origin_dir/stimulus/easemymind_square_sum.csv"]"\
+ "[file normalize "$origin_dir/stimulus/easemymind_magnitude.csv"]"\
  "[file normalize "$origin_dir/stimulus/easemymind_input_2.csv"]"\
  "[file normalize "$origin_dir/stimulus/easemymind_input_1.csv"]"\
  "[file normalize "$origin_dir/verif/magnitude_tb_behav.wcfg"]"\
@@ -557,8 +557,8 @@ if {[string equal [get_filesets -quiet magnitude] ""]} {
 # Set 'magnitude' fileset object
 set obj [get_filesets magnitude]
 set files [list \
- [file normalize "${origin_dir}/stimulus/easemymind_square_sum_1.csv"] \
- [file normalize "${origin_dir}/stimulus/easemymind_magnitude_1.csv"] \
+ [file normalize "${origin_dir}/stimulus/easemymind_square_sum.csv"] \
+ [file normalize "${origin_dir}/stimulus/easemymind_magnitude.csv"] \
  [file normalize "${origin_dir}/stimulus/easemymind_input_2.csv"] \
  [file normalize "${origin_dir}/stimulus/easemymind_input_1.csv"] \
  [file normalize "${origin_dir}/verif/magnitude_tb_behav.wcfg"] \
@@ -567,7 +567,7 @@ set files [list \
 add_files -norecurse -fileset $obj $files
 
 # Set 'magnitude' fileset file properties for remote files
-set file "$origin_dir/stimulus/easemymind_square_sum_1.csv"
+set file "$origin_dir/stimulus/easemymind_square_sum.csv"
 set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets magnitude] [list "*$file"]]
 set_property -name "is_enabled" -value "1" -objects $file_obj
@@ -578,7 +578,7 @@ set_property -name "used_in" -value "synthesis simulation" -objects $file_obj
 set_property -name "used_in_simulation" -value "1" -objects $file_obj
 set_property -name "used_in_synthesis" -value "1" -objects $file_obj
 
-set file "$origin_dir/stimulus/easemymind_magnitude_1.csv"
+set file "$origin_dir/stimulus/easemymind_magnitude.csv"
 set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets magnitude] [list "*$file"]]
 set_property -name "is_enabled" -value "1" -objects $file_obj

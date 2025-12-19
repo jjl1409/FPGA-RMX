@@ -56,25 +56,25 @@
       <obj_property name="ElementShortName">data_in_2_read[15:0]</obj_property>
       <obj_property name="ObjectShortName">data_in_2_read[15:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/magnitude_tb/square_sum_1_read" type="array">
-      <obj_property name="ElementShortName">square_sum_1_read[32:0]</obj_property>
-      <obj_property name="ObjectShortName">square_sum_1_read[32:0]</obj_property>
+   <wvobject fp_name="/magnitude_tb/square_sum_read" type="array">
+      <obj_property name="ElementShortName">square_sum_read[32:0]</obj_property>
+      <obj_property name="ObjectShortName">square_sum_read[32:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/magnitude_tb/magnitude_1_read" type="array">
-      <obj_property name="ElementShortName">magnitude_1_read[16:0]</obj_property>
-      <obj_property name="ObjectShortName">magnitude_1_read[16:0]</obj_property>
+   <wvobject fp_name="/magnitude_tb/magnitude_read" type="array">
+      <obj_property name="ElementShortName">magnitude_read[16:0]</obj_property>
+      <obj_property name="ObjectShortName">magnitude_read[16:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/magnitude_tb/square_sum_1_expected" type="array">
-      <obj_property name="ElementShortName">square_sum_1_expected[32:0]</obj_property>
-      <obj_property name="ObjectShortName">square_sum_1_expected[32:0]</obj_property>
+   <wvobject fp_name="/magnitude_tb/square_sum_expected" type="array">
+      <obj_property name="ElementShortName">square_sum_expected[32:0]</obj_property>
+      <obj_property name="ObjectShortName">square_sum_expected[32:0]</obj_property>
    </wvobject>
    <wvobject fp_name="/magnitude_tb/dut/square_sum_out" type="array">
       <obj_property name="ElementShortName">square_sum_out[32:0]</obj_property>
       <obj_property name="ObjectShortName">square_sum_out[32:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/magnitude_tb/magnitude_1_expected" type="array">
-      <obj_property name="ElementShortName">magnitude_1_expected[16:0]</obj_property>
-      <obj_property name="ObjectShortName">magnitude_1_expected[16:0]</obj_property>
+   <wvobject fp_name="/magnitude_tb/magnitude_expected" type="array">
+      <obj_property name="ElementShortName">magnitude_expected[16:0]</obj_property>
+      <obj_property name="ObjectShortName">magnitude_expected[16:0]</obj_property>
    </wvobject>
    <wvobject fp_name="/magnitude_tb/data_out" type="array">
       <obj_property name="ElementShortName">data_out[16:0]</obj_property>

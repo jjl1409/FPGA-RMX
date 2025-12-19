@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="fir_filter_tb_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="fir_filter_tb" />
+            <top_module name="glbl" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="6.767 ns"></ZoomStartTime>
+      <ZoomEndTime time="56.168 ns"></ZoomEndTime>
+      <Cursor1Time time="15.067 ns"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="534"></NameColumnWidth>
+      <ValueColumnWidth column_width="142"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="25" />
+   <wvobject fp_name="/fir_filter_tb/clk" type="logic">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/fir_filter_tb/rst" type="logic">
+      <obj_property name="ElementShortName">rst</obj_property>
+      <obj_property name="ObjectShortName">rst</obj_property>
+   </wvobject>
+   <wvobject fp_name="/fir_filter_tb/filter_coefficients" type="array">
+      <obj_property name="ElementShortName">filter_coefficients[31:0][11:0]</obj_property>
+      <obj_property name="ObjectShortName">filter_coefficients[31:0][11:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/fir_filter_tb/data_in_ready" type="logic">
+      <obj_property name="ElementShortName">data_in_ready</obj_property>
+      <obj_property name="ObjectShortName">data_in_ready</obj_property>
+   </wvobject>
+   <wvobject fp_name="/fir_filter_tb/data_in" type="array">
+      <obj_property name="ElementShortName">data_in[16:0]</obj_property>
+      <obj_property name="ObjectShortName">data_in[16:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/fir_filter_tb/data_out_ready" type="logic">
+      <obj_property name="ElementShortName">data_out_ready</obj_property>
+      <obj_property name="ObjectShortName">data_out_ready</obj_property>
+   </wvobject>
+   <wvobject fp_name="/fir_filter_tb/data_out_expected" type="array">
+      <obj_property name="ElementShortName">data_out_expected[16:0]</obj_property>
+      <obj_property name="ObjectShortName">data_out_expected[16:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/fir_filter_tb/data_out" type="array">
+      <obj_property name="ElementShortName">data_out[16:0]</obj_property>
+      <obj_property name="ObjectShortName">data_out[16:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/fir_filter_tb/done" type="logic">
+      <obj_property name="ElementShortName">done</obj_property>
+      <obj_property name="ObjectShortName">done</obj_property>
+   </wvobject>
+   <wvobject fp_name="/fir_filter_tb/DATA_IN_BITS" type="array">
+      <obj_property name="ElementShortName">DATA_IN_BITS[31:0]</obj_property>
+      <obj_property name="ObjectShortName">DATA_IN_BITS[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/fir_filter_tb/DATA_OUT_BITS" type="array">
+      <obj_property name="ElementShortName">DATA_OUT_BITS[31:0]</obj_property>
+      <obj_property name="ObjectShortName">DATA_OUT_BITS[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/fir_filter_tb/FILTER_BITS" type="array">
+      <obj_property name="ElementShortName">FILTER_BITS[31:0]</obj_property>
+      <obj_property name="ObjectShortName">FILTER_BITS[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/fir_filter_tb/FILTER_TAPS" type="array">
+      <obj_property name="ElementShortName">FILTER_TAPS[31:0]</obj_property>
+      <obj_property name="ObjectShortName">FILTER_TAPS[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/fir_filter_tb/dut/products" type="array">
+      <obj_property name="ElementShortName">products[31:0][28:0]</obj_property>
+      <obj_property name="ObjectShortName">products[31:0][28:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/fir_filter_tb/dut/data_in" type="array">
+      <obj_property name="ElementShortName">data_in[16:0]</obj_property>
+      <obj_property name="ObjectShortName">data_in[16:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/fir_filter_tb/dut/data_in_shift" type="array">
+      <obj_property name="ElementShortName">data_in_shift[31:0][16:0]</obj_property>
+      <obj_property name="ObjectShortName">data_in_shift[31:0][16:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/fir_filter_tb/dut/products" type="array">
+      <obj_property name="ElementShortName">products[31:0][28:0]</obj_property>
+      <obj_property name="ObjectShortName">products[31:0][28:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/fir_filter_tb/dut/adder_0/data_in" type="array">
+      <obj_property name="ElementShortName">data_in[31:0][28:0]</obj_property>
+      <obj_property name="ObjectShortName">data_in[31:0][28:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/fir_filter_tb/dut/adder_0/adder" type="array">
+      <obj_property name="ElementShortName">adder[31:0][33:0]</obj_property>
+      <obj_property name="ObjectShortName">adder[31:0][33:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/fir_filter_tb/dut/adder_0/data_in_ready" type="logic">
+      <obj_property name="ElementShortName">data_in_ready</obj_property>
+      <obj_property name="ObjectShortName">data_in_ready</obj_property>
+   </wvobject>
+   <wvobject fp_name="/fir_filter_tb/dut/products_in_ready" type="logic">
+      <obj_property name="ElementShortName">products_in_ready</obj_property>
+      <obj_property name="ObjectShortName">products_in_ready</obj_property>
+   </wvobject>
+   <wvobject fp_name="/fir_filter_tb/dut/products_out_ready" type="logic">
+      <obj_property name="ElementShortName">products_out_ready</obj_property>
+      <obj_property name="ObjectShortName">products_out_ready</obj_property>
+   </wvobject>
+   <wvobject fp_name="/fir_filter_tb/dut/adder_0/data_in_ready" type="logic">
+      <obj_property name="ElementShortName">data_in_ready</obj_property>
+      <obj_property name="ObjectShortName">data_in_ready</obj_property>
+   </wvobject>
+   <wvobject fp_name="/fir_filter_tb/dut/adder_0/data_out_ready_shift" type="array">
+      <obj_property name="ElementShortName">data_out_ready_shift[0:4]</obj_property>
+      <obj_property name="ObjectShortName">data_out_ready_shift[0:4]</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <obj_property name="Reversed">true</obj_property>
+   </wvobject>
+   <wvobject fp_name="/fir_filter_tb/dut/adder_0/data_out_ready" type="logic">
+      <obj_property name="ElementShortName">data_out_ready</obj_property>
+      <obj_property name="ObjectShortName">data_out_ready</obj_property>
+   </wvobject>
+</wave_config>

@@ -5,9 +5,8 @@
 module moving_average_tb #(
     parameter DATA_IN_BITS = 24,
     parameter DATA_OUT_BITS = 24,
-    parameter AVERAGE_NUM = 32,
-    parameter AVERAGE_BITS = 5,
-    parameter ITERATIONS = 32000
+    parameter AVERAGE_NUM = 64,
+    parameter AVERAGE_BITS = 6
 )();
 
     // DUT inputs/outputs
@@ -42,14 +41,15 @@ module moving_average_tb #(
     end
 
     // Stimulus/testing logic
-    integer i;
-    integer j;
-    localparam DATA_IN_MAX = 2 ** DATA_IN_BITS - 1;
+    string data_in_file;
+    string data_out_file;
+    string line;
+    integer fd;
 
+    logic [DATA_IN_BITS - 1:0] data_in_read;
+    logic [DATA_OUT_BITS - 1:0] data_out_read;
     logic [DATA_IN_BITS - 1:0] data_in_q [$];
     logic [DATA_OUT_BITS - 1:0] data_out_q [$];
-    logic [DATA_IN_BITS - 1:0] data_in_generated;
-    logic [DATA_OUT_BITS - 1:0] data_out_generated = 0;
     logic [DATA_OUT_BITS - 1:0] data_out_expected;
     logic data_out_start = 0;
 
@@ -60,23 +60,33 @@ module moving_average_tb #(
     initial begin
         rst = 1'b1;
         done = 1'b0;
-        data_in_generated = '0;
         data_in_ready = 1'b0;
 
-        for (int i = 0; i < ITERATIONS; i++) begin
-            data_in_generated = $urandom_range(DATA_IN_MAX);
-//            data_in_generated = i;
-            data_in_q.push_back(data_in_generated);
-        end
-        for (int i = 0; i < ITERATIONS; i++) begin
-            data_out_generated = data_out_generated + (data_in_q[i] / AVERAGE_NUM);
-            if (i % AVERAGE_NUM == AVERAGE_NUM - 1) begin
-                data_out_q.push_back(data_out_generated);
-                $display("%t: Data_out: %d", $time, data_out_generated);
-                data_out_generated = 0;
-            end
-        end
+        data_in_file = "easemymind_fir_filter.csv";
+        data_out_file = "easemymind_moving_average.csv";
         
+        fd = $fopen(data_in_file, "r");
+        if (fd == 0) begin
+            $display("Error: Could not open %s", data_in_file);
+            $fatal;
+        end
+        while ($fgets(line, fd)) begin
+            $sscanf(line, "%d", data_in_read);
+            data_in_q.push_back(data_in_read);
+        end
+        $fclose(fd);
+
+        fd = $fopen(data_out_file, "r");
+        if (fd == 0) begin
+            $display("Error: Could not open %s", data_out_file);
+            $fatal;
+        end
+        while ($fgets(line, fd)) begin
+            $sscanf(line, "%d", data_out_read);
+            data_out_q.push_back(data_out_read);
+        end
+        $fclose(fd);
+
         @(posedge clk);
         rst = 1'b0;
         $display("%t: Random stimulus generated.", $time);
@@ -115,18 +125,13 @@ module moving_average_tb #(
     // Checker
     always @(posedge clk) begin
         if (data_out_ready) begin
-            if (data_out_start) begin
-                if (data_out_q.size() > 0) begin
-                    data_out_expected = data_out_q.pop_front;
-                    if (data_out !== data_out_expected) begin
-                        $display("%t: Mismatch in data out[%d]: Expected %d, got %d", $time, i, data_out_expected, data_out);
-                         $fatal;
-                    end
-                end else begin
-                    done <= 1'b1;
+            if (data_out_q.size() > 0) begin
+                data_out_expected = data_out_q.pop_front;
+                if (data_out !== data_out_expected) begin
+                    $display("%t: Mismatch in data out: Expected %d, got %d", $time, data_out_expected, data_out);
                 end
             end else begin
-                data_out_start <= 1'b1;
+                done <= 1'b1;
             end
         end
     end

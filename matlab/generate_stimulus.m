@@ -18,24 +18,52 @@ function generate_stimulus(file, path, extension)
     end
     writematrix(output_1, "../stimulus/" + file + "_input_1.csv");
     writematrix(output_2, "../stimulus/" + file + "_input_2.csv");
-    generate_magnitude(file)
+    % generate_magnitude(file)
+    % generate_fir_filter(file)
+    generate_moving_average(file)
 end
 
 % Generates magnitude files from magnitude module
-% Outputs are files with suffix _square_sum_1 and _magnitude_1
+% Outputs are files with suffix _square_sum and _magnitude
 function generate_magnitude(file)
     arguments
         file (1, 1) string
     end
     input_1 = readmatrix("../stimulus/" + file + "_input_1.csv");
     input_2 = readmatrix("../stimulus/" + file + "_input_2.csv");
-    square_sum_1 = zeros(length(input_1), 1);
-    magnitude_1 = zeros(length(input_1), 1);
+    square_sum = zeros(length(input_1), 1);
+    outputs = zeros(length(input_1), 1);
     for i = 1:length(input_1)
-        [square_sum_1(i), magnitude_1(i)] = magnitude(uint16(input_1(i)), uint16(input_2(i)));
+        [square_sum(i), outputs(i)] = magnitude(uint16(input_1(i)), uint16(input_2(i)));
     end
-    writematrix(square_sum_1, "../stimulus/" + file + "_square_sum_1.csv");
-    writematrix(magnitude_1, "../stimulus/" + file + "_magnitude_1.csv");
+    writematrix(square_sum, "../stimulus/" + file + "_square_sum.csv");
+    writematrix(outputs, "../stimulus/" + file + "_magnitude.csv");
 end
 
+function generate_fir_filter(file)
+    arguments
+        file (1, 1) string
+    end
+    inputs = readmatrix("../stimulus/" + file + "_magnitude.csv");
+    [coefficients, outputs] = fir_filter(inputs);
+    filename = "../stimulus/" + "fir_filter_coefficients.mem";
+    fd = fopen(filename, 'w');
+    for i = 1:length(coefficients)
+        fwrite(fd, dec2bin(coefficients(i), 12));
+        fwrite(fd, newline);
+    end
+    fclose(fd);
+    writematrix(outputs, "../stimulus/" + file + "_fir_filter.csv")
+end
+
+function generate_moving_average(file)
+    arguments
+        file (1, 1) string
+    end
+    inputs = readmatrix("../stimulus/" + file + "_fir_filter.csv");
+    outputs = moving_average(inputs, 64);
+    length(outputs)
+    plot_time(outputs, floor(44100 / 64), 1)
+    writematrix(outputs, "../stimulus/" + file + "_moving_average.csv");
+end
 
